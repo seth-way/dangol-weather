@@ -4,16 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/seth-way/weather-west.git"
+    "preview": "vite preview"
   },
   "homepage": "https://seth-way.github.io/weather-west/",
   "dependencies": {
