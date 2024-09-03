@@ -15,7 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/seth-way/weather-west.git"
   },
-  "homepage": "https://seth-way.github.io/weather-west",
+  "homepage": "https://seth-way.github.io/weather-west/",
   "dependencies": {
     "eslint-plugin-react": "^7.35.2",
     "react": "^18.3.1",
