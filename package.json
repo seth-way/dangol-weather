@@ -25,6 +25,7 @@
     "eslint-plugin-react": "^7.35.2",
     "image-ascii-art": "^1.5.2",
     "lucide-react": "^0.438.0",
+    "radix": "^0.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.1",
