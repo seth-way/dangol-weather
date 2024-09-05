@@ -1,6 +1,10 @@
 import { useState } from 'react';
-import { ThemeProvider } from "@/components/theme-provider";
-import './App.css'
+import { Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "@/components/ui/theme-provider.tsx";
+import './App.css';
+import WeatherDisplayMain from './components/WeatherDisplayMain.tsx';
+import DropdownDisplay from './components/DropdownDisplay.tsx';
+import UserLocationInput from './components/UserLocationInput.tsx';
 import {
   Card,
   CardContent,
@@ -8,8 +12,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/Components/ui/card"
-import { ModeToggle } from './Components/mode-toggle';
+} from "@/components/ui/card.tsx"
+import { ModeToggle } from './components/ui/mode-toggle.tsx';
 
 
 function App() {
@@ -18,8 +22,13 @@ function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <ModeToggle />
-    <Card>
-      <CardHeader>
+      <Card>
+        <Routes>
+          <Route path={'/'} element={<UserLocationInput />} />
+          {/* <Route path={'/'} element={<WeatherDisplayMain />} />
+          <Route path={'/'} element={<DropdownDisplay />} /> */}
+        </Routes>
+        {/* <CardHeader>
         <CardTitle>Card Title</CardTitle>
         <CardDescription>Card Description</CardDescription>
       </CardHeader>
@@ -28,10 +37,11 @@ function App() {
       </CardContent>
       <CardFooter>
         <p>Card Footer</p>
-      </CardFooter>
-    </Card>
+      </CardFooter> */}
+      </Card>
     </ThemeProvider>
   )
 }
 
 export default App
+
