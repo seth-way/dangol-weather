@@ -1,0 +1,18 @@
+[
+  {
+      "name": "Pittsburgh",
+      "local_names": {
+          "eo": "Picburgo",
+          "oc": "Pittsburgh",
+          "he": "פיטסבורג",
+          "ko": "피츠버그",
+          "mi": "Pitipāka",
+          "ru": "Питтсбург",
+          "en": "Pittsburgh"
+      },
+      "lat": 40.4416941,
+      "lon": -79.9900861,
+      "country": "US",
+      "state": "Pennsylvania"
+  }
+]
