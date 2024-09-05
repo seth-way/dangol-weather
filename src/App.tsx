@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { Routes, Route } from "react-router-dom";
-import { ThemeProvider } from "@/components/ui/theme-provider.tsx";
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import WeatherDisplayMain from './components/WeatherDisplayMain.tsx';
 import DropdownDisplay from './components/DropdownDisplay.tsx';
@@ -12,15 +11,12 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card.tsx"
+} from '@/components/ui/card.tsx';
 import { ModeToggle } from './components/ui/mode-toggle.tsx';
 
-
 function App() {
-
-
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+    <>
       <ModeToggle />
       <Card>
         <Routes>
@@ -34,14 +30,10 @@ function App() {
       </CardHeader>
       <CardContent>
         <p>Card Content</p>
-      </CardContent>
-      <CardFooter>
-        <p>Card Footer</p>
-      </CardFooter> */}
+      </CardContent>*/}
       </Card>
-    </ThemeProvider>
-  )
+    </>
+  );
 }
 
-export default App
-
+export default App;
