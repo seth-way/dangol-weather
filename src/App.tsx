@@ -15,14 +15,19 @@ import {
 import { ModeToggle } from './components/ui/mode-toggle.tsx';
 
 function App() {
+  // const [location, setLocation] = useState(null);
+  const [citiesList, setCitiesList] = useState<string[]>([]);
+  const [filteredCities, setFilteredCities] = useState<string[]>([]);
+
   return (
     <>
-      <ModeToggle />
       <Card>
+      <ModeToggle className='mt-5' />
         <Routes>
-          <Route path={'/'} element={<UserLocationInput />} />
-          {/* <Route path={'/'} element={<WeatherDisplayMain />} />
-          <Route path={'/'} element={<DropdownDisplay />} /> */}
+          <Route path={'/'} element={<UserLocationInput setFilteredCities={setFilteredCities} 
+          filteredCities={filteredCities} citiesList={citiesList} setCitiesList={setCitiesList}  />} />
+          <Route path={'/location/:lat/:long'} element={<WeatherDisplayMain />} />
+         {/*  <Route path={'/'} element={<DropdownDisplay />} /> */}
         </Routes>
         {/* <CardHeader>
         <CardTitle>Card Title</CardTitle>
