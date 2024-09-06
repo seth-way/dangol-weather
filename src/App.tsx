@@ -21,8 +21,8 @@ function App() {
 
   return (
     <>
-      <ModeToggle />
       <Card>
+      <ModeToggle className='mt-5' />
         <Routes>
           <Route path={'/'} element={<UserLocationInput setFilteredCities={setFilteredCities} 
           filteredCities={filteredCities} citiesList={citiesList} setCitiesList={setCitiesList}  />} />
