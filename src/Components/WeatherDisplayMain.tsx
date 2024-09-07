@@ -14,6 +14,8 @@ import {
   Dropdownmenu
 } from '@/components/ui/card';
 
+import DropdownDisplay from './DropdownDisplay';
+
 interface Props {
   city: string;
 }
@@ -160,7 +162,7 @@ const WeatherDisplayMain = ({ city }: Props) => {
 
     <>
       <CardContent className="flex flex-col items-center justify-center mb-4 px-4">
-        <div className="flex justify-between items-center w-full px-3 mt-3 mr-2">
+        {/* <div className="flex justify-between items-center w-full px-3 mt-3 mr-2">
           <div className="flex space-x-2">
             <button className="text-sm font-semibold px-3 py-1 
         border rounded bg-gray-200 hover:bg-gray-300 w-30">
@@ -172,7 +174,8 @@ const WeatherDisplayMain = ({ city }: Props) => {
             </button>
           </div>
 
-        </div>
+        </div> */}
+        <DropdownDisplay />
 
         <div className="flex flex-row justify-center my-4">
           <GlobeSVG height={50} width={50} className="animate-spin-slow" />
