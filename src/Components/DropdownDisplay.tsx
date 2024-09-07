@@ -11,6 +11,7 @@ import CloudSVG from '../assets/images/weather_icons/cloudy.svg'
 import SnowSVG from '../assets/images/weather_icons/snow.svg'
 import RainSVG from '../assets/images/weather_icons/rainy.svg'
 import FogSVG from '../assets/images/weather_icons/fog.svg'
+import { useNavigate } from 'react-router-dom';
 
 //display the date without the year
 //the drop down will have an image and the date in month and day
@@ -88,6 +89,12 @@ const displayMyDropdown = (data: NewWeatherData)=> {
 
 const DropdownDisplay: React.FC = () => {
 
+  const navigate = useNavigate();
+
+  const homePageView = () => {
+    navigate('/')
+  }
+
   const [drop, setDrop] = useState<boolean>(false)
   // const [myWeather, setMyWeather] = useState<boolean>(false)
   // need to toggle the functionality of the button 
@@ -146,6 +153,13 @@ const DropdownDisplay: React.FC = () => {
             ))}
           </div>
         </PopoverContent>
+      </Popover>
+      <Popover>
+      <PopoverTrigger className='pl-1' >
+          <Button onClick={homePageView}>
+            Home
+          </Button>
+        </PopoverTrigger>
       </Popover>
     </div>
   )
