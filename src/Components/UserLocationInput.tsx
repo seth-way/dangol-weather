@@ -79,7 +79,7 @@ function UserLocationInput() {
             className='nav-search-button font-semibold padding 10px rounded no-line-through hover:line-through'
             onClick={handleSearchReset}
           >
-            RESET
+            RESET.
           </button>
         </form>
       </CardContent>
