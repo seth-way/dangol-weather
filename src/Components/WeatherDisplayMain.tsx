@@ -2,7 +2,11 @@
 import { useParams } from 'react-router-dom';
 import weatherData from '../assets/dummy_data/weather.json';
 
-const WeatherDisplayMain = () => {
+interface Props {
+  city: string;
+}
+
+const WeatherDisplayMain = ({ city }: Props) => {
   const { lat, long } = useParams<{ lat: string; long: string }>();
   console.log('weather data ', weatherData);
 
@@ -110,7 +114,7 @@ const WeatherDisplayMain = () => {
       function getDaysAfter(currentTime: number, info: weatherInfoObject) {
         const daysAfter: Array<object> = [];
         info.list.forEach(listObject => {
-          if (((listObject.dt + 43200) % 86400) === 0) {
+          if ((listObject.dt + 43200) % 86400 === 0) {
             daysAfter.push(listObject);
           }
         });
@@ -147,12 +151,19 @@ const WeatherDisplayMain = () => {
       <div>
         {lat} is your current latitude and {long} is your current longitude.
       </div>
-      <div>Your current weather is: {(weatherTranslate(weatherData)[0].weather).toString()}</div>
       <div>
-      Your current temperature is {(weatherTranslate(weatherData)[0].temp).toString()} degrees Farenheit.
+        Your current weather is:{' '}
+        {weatherTranslate(weatherData)[0].weather.toString()}
       </div>
       <div>
-      The highs and lows for right now are {(weatherTranslate(weatherData)[0].temp_max).toString()} and {(weatherTranslate(weatherData)[0].temp_min).toString()} degrees Farenheit.
+        Your current temperature is{' '}
+        {weatherTranslate(weatherData)[0].temp.toString()} degrees Farenheit.
+      </div>
+      <div>
+        The highs and lows for right now are{' '}
+        {weatherTranslate(weatherData)[0].temp_max.toString()} and{' '}
+        {weatherTranslate(weatherData)[0].temp_min.toString()} degrees
+        Farenheit.
       </div>
       {/* add humidity, add date, add windspeed. */}
     </div>

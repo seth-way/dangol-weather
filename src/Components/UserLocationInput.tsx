@@ -1,91 +1,60 @@
 /// <reference types="vite-plugin-svgr/client" />
 import AsciiArt from './AsciiArt';
-import {
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card.tsx';
+import PlacesAutoComplete from './PlacesAutoComplete';
+import { CardContent, CardFooter, CardHeader } from '@/components/ui/card.tsx';
 import boomhauer from '../assets/images/booms/classic_boom.jpg';
 import GlobeSVG from '../assets/images/globe.svg?react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import locationData from '../assets/dummy_data/location.json';
 import { useNavigate } from 'react-router-dom';
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
-import useOnclickOutside from "react-cool-onclickoutside";
+import { APIProvider } from '@vis.gl/react-google-maps';
 
-function UserLocationInput() {
+interface Props {
+  setCity: (city: string) => void;
+}
+
+function UserLocationInput({ setCity }: Props) {
   const navigate = useNavigate();
-  const { lat, lon } = locationData[0];
-  const [userSearchInput, setUserSearchInput] = useState<string>('');
+  const [selectedPlace, setSelectedPlace] =
+    useState<google.maps.places.PlaceResult | null>(null);
+    
+  useEffect(() => {
+    if (selectedPlace && selectedPlace.geometry && selectedPlace.name) {
+      const { geometry } = selectedPlace;
+      const city = selectedPlace.name;
+      const lat = geometry.location?.lat();
+      const lng = geometry.location?.lng();
 
-  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserSearchInput(() => e.currentTarget.value);
-    //const newList = filterCities(e.currentTarget.value, citiesList);
-    //setFilteredCities(newList);
-    //if (newList.length === 0) {
-    //  alert('No results matching your search, please try again!');
-    //}
-  };
-
-  // function filterCities(name: string, cities: string[]) {
-  //   return cities.filter(city =>
-  //     city.name.toLowerCase().includes(name.toLowerCase())
-  //   );
-  // }
-
-  function clearForm() {
-    //setFilteredCities(citiesList);
-    setUserSearchInput('');
-  };
-
-  const handleLocationSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    navigate(`/location/${lat}/${lon}`);
-  };
-
-  const handleSearchReset = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void => {
-    e.preventDefault();
-    clearForm();
-  };
-
+      if (lat && lng) {
+        setCity(city);
+        navigate(`/location/${lat}/${lng}`);
+      }
+    }
+  }, [selectedPlace, navigate, setCity]);
   return (
     <>
-      <CardHeader className='title font-bold text-2xl'>DANGOL'WEATHER.</CardHeader>
+      <CardHeader className='title font-bold text-2xl'>
+        DANGOL&apos;WEATHER.
+      </CardHeader>
       <CardContent className='flex flex-col items-center justify-center'>
         <div className='flex flex-row justify-center space-x-1'>
           <GlobeSVG height={50} width={50} />
           <GlobeSVG height={50} width={50} />
         </div>
-        <form onSubmit={handleLocationSubmit} className='flex flex-col items-center space-y-2 mt-4'>
-          <input
-            type='text'
-            placeholder='Search by City'
-            className='search-by-city'
-            value={userSearchInput}
-            onChange={handleSearchInput}
-          />
-          <button
-            type='reset'
-            className='nav-search-button'
-            onClick={handleSearchReset}
+        <form className='flex flex-col items-center space-y-2 mt-4'>
+          <APIProvider
+            apiKey={import.meta.env.VITE_GMAPS_API_KEY}
+            solutionChannel='GMP_devsite_samples_v3_rgmautocomplete'
           >
-            Reset
-          </button>
+            <PlacesAutoComplete onPlaceSelect={setSelectedPlace} />
+          </APIProvider>
         </form>
       </CardContent>
       <CardFooter>
         <AsciiArt src={boomhauer} height={256} width={256} fontSize={0.3} />
       </CardFooter>
     </>
-  )
+  );
 }
-
 
 export default UserLocationInput;
