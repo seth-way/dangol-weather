@@ -52,9 +52,13 @@ interface windSubObjectInterface {
     gust: number;
 }
 
-const WeatherDisplayMain = () => {
-    const { lat, long } = useParams<{ lat: string; long: string }>();
-    // console.log('weather data ', weatherData);
+interface Props {
+  city: string;
+}
+
+const WeatherDisplayMain = ({ city }: Props) => {
+  const { lat, long } = useParams<{ lat: string; long: string }>();
+  console.log('weather data ', weatherData);
 
     function weatherTranslate(weatherInfo: any) {
         // translate unix time to utc/javascript,
