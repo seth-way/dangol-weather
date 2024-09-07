@@ -14,7 +14,11 @@ import {
   Dropdownmenu
 } from '@/components/ui/card';
 
-const WeatherDisplayMain = () => {
+interface Props {
+  city: string;
+}
+
+const WeatherDisplayMain = ({ city }: Props) => {
   const { lat, long } = useParams<{ lat: string; long: string }>();
   console.log('weather data ', weatherData);
 
@@ -80,8 +84,7 @@ const WeatherDisplayMain = () => {
     // const listval : {[key:string]:string} = Object.entries(weatherInfo).find(([key, val]) => key === desiredKey)?.[1];;
     console.log(weatherInfo.list[0].main);
     const weatherInfoArrayToday: Array<userSideWeatherInfo> = [];
-    const weatherInfoArrayWeek: Array<userSideWeatherInfo> = [];
-
+    
     function returnInfo(weatherInfo: weatherInfoObject) {
       console.log(weatherInfo);
       // let userInfoReturn :userSideWeatherInfo;
@@ -195,7 +198,7 @@ const WeatherDisplayMain = () => {
       </CardFooter>
 
       <CardContent className="text-right italic text-sm tracking-tighter">
-        'dang ol rain, like a, a dang ol bucket, man'
+      &apos;dang ol rain, like a, a dang ol bucket, man&apos;
       </CardContent>
     </>
   );
