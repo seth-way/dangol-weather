@@ -2,7 +2,7 @@
 import AsciiArt from './AsciiArt';
 import PlacesAutoComplete from './PlacesAutoComplete';
 import { CardContent, CardFooter, CardHeader } from '@/components/ui/card.tsx';
-import boomhauer from '../assets/images/booms/classic_boom.jpg';
+import classicBoom from '../assets/images/booms/classic_boom.jpg';
 import GlobeSVG from '../assets/images/globe.svg?react';
 import { useState, useEffect } from 'react';
 import locationData from '../assets/dummy_data/location.json';
@@ -37,9 +37,11 @@ function UserLocationInput({ setCity }: Props) {
         DANGOL&apos;WEATHER.
       </CardHeader>
       <CardContent className='flex flex-col items-center justify-center'>
-        <div className='flex flex-row justify-center space-x-1'>
-          <GlobeSVG height={50} width={50} />
-          <GlobeSVG height={50} width={50} />
+      <div className='flex flex-row justify-center my-'>
+          <GlobeSVG height={50} width={50} 
+          className='animate-spin-slow' />
+          <GlobeSVG height={140} width={140}
+           className='animate-spin-slower animate-reverse-spin' />
         </div>
         <form className='flex flex-col items-center space-y-2 mt-4'>
           <APIProvider
@@ -51,10 +53,13 @@ function UserLocationInput({ setCity }: Props) {
         </form>
       </CardContent>
       <CardFooter>
-        <AsciiArt src={boomhauer} height={256} width={256} fontSize={0.3} />
+        <AsciiArt src={classicBoom} height={256} width={256} fontSize={0.3} />
       </CardFooter>
     </>
   );
 }
 
 export default UserLocationInput;
+
+
+

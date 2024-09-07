@@ -21,7 +21,7 @@ function App() {
   return (
     <>
       <Card>
-      <ModeToggle className='mt-5' />
+      <ModeToggle />
         <Routes>
           <Route path={'/'} element={<UserLocationInput setCity={setCity}/>} />
           <Route path={'/location/:lat/:long'} element={<WeatherDisplayMain city={city}/>} />
