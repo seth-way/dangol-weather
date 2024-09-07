@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
   Popover,
-  PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
 import weatherData from '../assets/dummy_data/weather.json'
@@ -21,12 +20,6 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
@@ -188,7 +181,7 @@ const DropdownDisplay: React.FC = () => {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-20 ml-12">
           <DropdownMenuLabel>Forecast</DropdownMenuLabel>
-          <DropdownMenuGroup className='max-h-[500px] w-20 pl-1'>
+          <DropdownMenuGroup className='max-h-[500px] w-25 pl-1'>
             <div className='cursor-pointer'>
               {fiveDayForecast?.map((weather, index)=> (
                 <DropdownMenuItem className='flex items-center'>
@@ -202,13 +195,20 @@ const DropdownDisplay: React.FC = () => {
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
-      <Popover>
+      {/* <Popover>
         <PopoverTrigger className='pl-1' >
           <Button onClick={homePageView}>
             Home
           </Button>
         </PopoverTrigger>
-      </Popover>
+      </Popover > */}
+      <DropdownMenu >
+        <DropdownMenuTrigger asChild>
+          <Button variant="outline" className='ml-2'>
+            Home
+            </Button>
+        </DropdownMenuTrigger>
+      </DropdownMenu>
     </div>
   )
 }
