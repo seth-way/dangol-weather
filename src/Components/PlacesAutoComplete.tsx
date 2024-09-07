@@ -33,11 +33,11 @@ const PlacesAutocomplete = () => {
     setValue,
   } = usePlacesAutocomplete({ callbackName: 'YOUR_CALLBACK_NAME' });
 
-  const handleInput = e => {
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
 
-  const handleSelect = val => {
+  const handleSelect = (val: string) => {
     setValue(val, false);
   };
 

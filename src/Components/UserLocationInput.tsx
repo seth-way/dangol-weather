@@ -18,25 +18,16 @@ import usePlacesAutocomplete, {
 } from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
 
+
 function UserLocationInput() {
   const navigate = useNavigate();
   const { lat, lon } = locationData[0];
   const [userSearchInput, setUserSearchInput] = useState<string>('');
 
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserSearchInput(() => e.currentTarget.value);
-    //const newList = filterCities(e.currentTarget.value, citiesList);
-    //setFilteredCities(newList);
-    //if (newList.length === 0) {
-    //  alert('No results matching your search, please try again!');
-    //}
+    setUserSearchInput(e.currentTarget.value);
   };
 
-  // function filterCities(name: string, cities: string[]) {
-  //   return cities.filter(city =>
-  //     city.name.toLowerCase().includes(name.toLowerCase())
-  //   );
-  // }
 
   function clearForm() {
     //setFilteredCities(citiesList);
