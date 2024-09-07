@@ -13,6 +13,25 @@ import RainSVG from '../assets/images/weather_icons/rainy.svg'
 import FogSVG from '../assets/images/weather_icons/fog.svg'
 import { useNavigate } from 'react-router-dom';
 
+//------------------
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+//--------------------
+
 //display the date without the year
 //the drop down will have an image and the date in month and day
 //
@@ -136,26 +155,55 @@ const DropdownDisplay: React.FC = () => {
   }, [newWeatherData])
   console.log('line 110', fiveDayForecast)
   return (
+    // <div className='flex justify-start p-4'>
+    //   <Popover open={drop} onOpenChange={setDrop} >
+    //     <PopoverTrigger asChild>
+    //       <Button onClick={toggleFunction} className='cursor-pointer'>
+    //         5 Days
+    //       </Button>
+    //     </PopoverTrigger>
+    //     <PopoverContent className='max-h-[500px] w-20 pl-1'>
+    //       <div className='cursor-pointer'>
+    //         {fiveDayForecast?.map((weather, index)=> (
+    //           <div key={index} className='flex items-center justify-between mb-2'>
+    //             <p className="text-xs">{weather.date}</p>
+    //             <img src={allIcons[weather.icon] || SunnySVG} className='w-8 h-8 pl-1'/>
+    //           </div>
+    //         ))}
+    //       </div>
+    //     </PopoverContent>
+    //   </Popover>
+    //   <Popover>
+    //   <PopoverTrigger className='pl-1' >
+    //       <Button onClick={homePageView}>
+    //         Home
+    //       </Button>
+    //     </PopoverTrigger>
+    //   </Popover>
+    // </div>
     <div className='flex justify-start p-4'>
-      <Popover open={drop} onOpenChange={setDrop} >
-        <PopoverTrigger asChild>
-          <Button onClick={toggleFunction} className='cursor-pointer'>
-            5 Days
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className='max-h-[500px] w-20 pl-1'>
-          <div >
-            {fiveDayForecast?.map((weather, index)=> (
-              <div key={index} className='flex items-center justify-between mb-2'>
-                <p className="text-xs">{weather.date}</p>
-                <img src={allIcons[weather.icon] || SunnySVG} className='w-8 h-8 pl-1'/>
-              </div>
-            ))}
-          </div>
-        </PopoverContent>
-      </Popover>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="outline">5 Day</Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-20 ml-12">
+          <DropdownMenuLabel>Forecast</DropdownMenuLabel>
+          <DropdownMenuGroup className='max-h-[500px] w-20 pl-1'>
+            <div className='cursor-pointer'>
+              {fiveDayForecast?.map((weather, index)=> (
+                <DropdownMenuItem className='flex items-center'>
+                  <div key={index} className='flex items-center justify-between mb-2'>
+                    <p className="text-xs">{weather.date}</p>
+                    <img src={allIcons[weather.icon] || SunnySVG} className='w-8 h-8 pl-1 ml-5'/>
+                  </div>
+                </DropdownMenuItem>  
+              ))}
+            </div>
+          </DropdownMenuGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
       <Popover>
-      <PopoverTrigger className='pl-1' >
+        <PopoverTrigger className='pl-1' >
           <Button onClick={homePageView}>
             Home
           </Button>
