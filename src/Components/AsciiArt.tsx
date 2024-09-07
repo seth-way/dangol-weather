@@ -33,8 +33,10 @@ const AsciiArt = ({ src, height, width }: AsciiProps) => {
           artType={ArtTypeEnum.ASCII}
           charsPerLine={150}
           charsPerColumn={150}
-          fontColor={theme === 'dark' ? 'white' : 'black'}
-          backgroundColor={theme === 'dark' ? 'black' : 'white'}
+          fontColor='white'
+          backgroundColor='black'
+          // fontColor={theme === 'dark' ? 'white' : 'black'}
+          // backgroundColor={theme === 'dark' ? 'black' : 'white'}
         />
       )}
     </div>

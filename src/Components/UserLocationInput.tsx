@@ -7,7 +7,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import boomhauer from '../assets/images/booms/classic_boom.jpg';
+import classicBoom from '../assets/images/booms/classic_boom.jpg';
+import sunnyBoom from '../assets/images/booms/sunny_boom.jpg';
+import snowyBoom from '../assets/images/booms/snow_boom.jpg';
+import thunderBoom from '../assets/images/booms/thunder_boom.jpg';
 import GlobeSVG from '../assets/images/globe.svg?react';
 import { useState } from 'react';
 import locationData from '../assets/dummy_data/location.json';
@@ -57,7 +60,7 @@ function UserLocationInput() {
 
   return (
     <>
-      <CardHeader className='title font-bold text-2xl tracking-tighter'>Dang'olWeather.</CardHeader>
+      <CardHeader className='title font-bold text-2xl tracking-tighter'>DANG'OLWEATHER</CardHeader>
       <CardContent className='flex flex-col items-center justify-center'>
       <div className='flex flex-row justify-center my-'>
           <GlobeSVG height={50} width={50} 
@@ -79,12 +82,12 @@ function UserLocationInput() {
             className='nav-search-button font-semibold padding 10px rounded no-line-through hover:line-through'
             onClick={handleSearchReset}
           >
-            RESET.
+            -RESET-
           </button>
         </form>
       </CardContent>
       <CardFooter>
-        <AsciiArt src={boomhauer} height={256} width={256} fontSize={0.3} />
+        <AsciiArt src={classicBoom} height={256} width={256} fontSize={0.3} />
       </CardFooter>
     </>
   )
