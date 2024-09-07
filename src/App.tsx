@@ -21,7 +21,7 @@ function App() {
 
   return (
     <>
-      <Card>
+      <Card className='relative'>
       <ModeToggle />
         <Routes>
           <Route path={'/'} element={<UserLocationInput setFilteredCities={setFilteredCities} 
@@ -36,6 +36,7 @@ function App() {
       <CardContent>
         <p>Card Content</p>
       </CardContent>*/}
+      
       </Card>
     </>
   );
