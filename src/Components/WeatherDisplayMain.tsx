@@ -84,7 +84,7 @@ const WeatherDisplayMain = ({ city }: Props) => {
     // const listval : {[key:string]:string} = Object.entries(weatherInfo).find(([key, val]) => key === desiredKey)?.[1];;
     console.log(weatherInfo.list[0].main);
     const weatherInfoArrayToday: Array<userSideWeatherInfo> = [];
-    
+
     function returnInfo(weatherInfo: weatherInfoObject) {
       console.log(weatherInfo);
       // let userInfoReturn :userSideWeatherInfo;
@@ -181,7 +181,7 @@ const WeatherDisplayMain = ({ city }: Props) => {
 
         <div className="text-center">
           {/* <div className="text-lg font-bold">{lat} - {long}</div> */}
-          <div className="text-lg font-bold">DETROIT</div>
+          <div className="text-lg font-bold">{city.toUpperCase()}</div>
           <div>
             {(weatherTranslate(weatherData)[0].temp_min).toString()}°F
             -- {(weatherTranslate(weatherData)[0].temp_max).toString()}°F
