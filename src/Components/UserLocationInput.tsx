@@ -33,15 +33,14 @@ function UserLocationInput({ setCity }: Props) {
   }, [selectedPlace, navigate, setCity]);
   return (
     <>
-      <CardHeader className='title font-bold text-2xl'>
-        DANGOL&apos;WEATHER.
-      </CardHeader>
+      <CardHeader className='flex justify-start p1-4 font-bold 
+      text-2xl tracking-tighter'>DANGOL&apos;WEATHER</CardHeader>
       <CardContent className='flex flex-col items-center justify-center'>
-      <div className='flex flex-row justify-center my-'>
-          <GlobeSVG height={50} width={50} 
-          className='animate-spin-slow' />
-          <GlobeSVG height={140} width={140}
-           className='animate-spin-slower animate-reverse-spin' />
+        <div className='flex flex-row justify-center my-'>
+          <GlobeSVG height={50} width={50}
+            className='animate-spin-slow' />
+          <GlobeSVG height={120} width={120}
+            className='animate-spin-slower animate-reverse-spin' />
         </div>
         <form className='flex flex-col items-center space-y-2 mt-4'>
           <APIProvider

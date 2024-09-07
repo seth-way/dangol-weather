@@ -20,7 +20,7 @@ function App() {
 
   return (
     <>
-      <Card>
+      <Card className='relative'>
       <ModeToggle />
         <Routes>
           <Route path={'/'} element={<UserLocationInput setCity={setCity}/>} />
@@ -34,6 +34,7 @@ function App() {
       <CardContent>
         <p>Card Content</p>
       </CardContent>*/}
+      
       </Card>
     </>
   );

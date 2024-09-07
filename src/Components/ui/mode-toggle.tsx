@@ -14,7 +14,7 @@ export function ModeToggle() {
   };
 
   return (
-    <div className='flex items-center space-x-2 mb-1'>
+    <div className='flex items-center space-x-2 absolute top-4 right-5'>
       <Switch
         id='airplane-mode'
         checked={theme === 'light'}
@@ -23,3 +23,4 @@ export function ModeToggle() {
     </div>
   );
 }
+
