@@ -1,59 +1,118 @@
-import { useState } from 'react';
-import { useParams  } from 'react-router-dom';
+// import { useState } from 'react';
+import AsciiArt from './AsciiArt';
+import GlobeSVG from '../assets/images/globe.svg?react';
+import classicBoom from '../assets/images/booms/classic_boom.jpg';
+import { useParams } from 'react-router-dom';
 import weatherData from '../assets/dummy_data/weather.json';
+import {
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Button,
+  Dropdownmenu
+} from '@/components/ui/card';
+import { useState } from 'react';
 import { weatherInfoObject, weatherDataFormat, userSideWeatherInfo, weatherTranslateWeekly } from '@/lib/utils';
 
-const WeatherDisplayMain = () => {
+
+import DropdownDisplay from './DropdownDisplay';
+
+interface Props {
+  city: string;
+}
+
+const WeatherDisplayMain = ({ city }: Props) => {
   const [weather5Day, set5Day] = useState([]);
   const [currentDay, setCurrentDay] = useState(0)
   const { lat, long } = useParams<{ lat: string; long: string }>();
-
-
+  console.log('weather data ', weatherData);
   const returnWeather: Array<userSideWeatherInfo> = (weatherTranslateWeekly(weatherData));
 
+ 
+  
+  console.log(weatherTranslateWeekly(weatherData));
+  // need a util function to turn weatherData.list -> "today & 4 day forcast"
+  // setHours(number between 0 and 23) to set an exact hour
+  // const currentDay = new Date()
+  // const
   return (
-    <div>
-      <div>
-        <h1>Your Weather Display
-          <br />
-          Updated as of {(returnWeather[0].date_text).toString()}, UTC.
-        </h1>
 
-        <div>
-          {lat} is your current latitude and {long} </div>
-        <div>Your current weather is: {(returnWeather[0].weather).toString()}</div>
-        <div>
-          Your current temperature is {(returnWeather[0].temp).toString()} degrees Farenheit.
-        </div>
-        <div>
-          The highs and lows for right now are {(returnWeather[0].temp_max).toString()} and {(returnWeather[0].temp_min).toString()} degrees Farenheit.
-        </div>
-        <div>
-          The humidity is {(returnWeather[0].humidity).toString()} percent.
-        </div>
-        <div>
-          The windspeed is {(returnWeather[0].windspeed).toString()} MPH.
-        </div>
-      </div>
+    <>
+      <CardContent className="flex flex-col items-center justify-center mb-4 px-4">
+        {/* <div className="flex justify-between items-center w-full px-3 mt-3 mr-2">
+          <div className="flex space-x-2">
+            <button className="text-sm font-semibold px-3 py-1 
+        border rounded bg-gray-200 hover:bg-gray-300 w-30">
+              5 DAY
+            </button>
+            <button className="text-sm font-semibold px-3 py-1
+         border rounded bg-gray-200 hover:bg-gray-300 w-30">
+              HOME
+            </button>
+          </div>
 
-      <div>
-        <br />
-        <div>
-          Your 5-ish day forecast:
+        </div> */}
+        <DropdownDisplay />
+
+        <div className="flex flex-row justify-center my-4">
+          <GlobeSVG height={50} width={50} className="animate-spin-slow" />
+          <GlobeSVG height={115} width={115} className="animate-spin-slower animate-reverse-spin" />
         </div>
-        <br />
-        Now: {(returnWeather[0].weather)}
-        <br />
-        {(returnWeather[1].date_text)}: {(returnWeather[1].weather)}
-        <br />
-        {(returnWeather[2].date_text)}: {(returnWeather[2].weather)}
-        <br />
-        {(returnWeather[3].date_text)}: {(returnWeather[3].weather)}
-        <br />
-        {(returnWeather[4].date_text)}: {(returnWeather[4].weather)}
-        <br />
-      </div>
-    </div >
-)}
+
+        <div className="text-center">
+          {/* <div className="text-lg font-bold">{lat} - {long}</div> */}
+          <div className="text-lg font-bold">{city.toUpperCase()}</div>
+          <div>
+            {/* {(weatherTranslate(weatherData)[0].temp_min).toString()}°F */}
+            420 degrees
+            -- 
+            {/* {(weatherTranslate(weatherData)[0].temp_max).toString()}°F */}
+            69 celsius
+            <div className='text-sm'>
+              conditions: <span className='font-bold'>rain</span>
+            </div>
+            <div className="italic text-sm">09/04/2024</div>
+          </div>
+        </div>
+      </CardContent>
+
+      <CardFooter className='flex justify-center'>
+        <AsciiArt src={classicBoom} height={256} width={256} fontSize={0.3} />
+      </CardFooter>
+
+      <CardContent className="text-right italic text-sm tracking-tighter">
+      &apos;dang ol rain, like a, a dang ol bucket, man&apos;
+      </CardContent>
+    </>
+  );
+};
+
+
+
+
+// <>
+//   <CardContent className='flex flex-col items-center justify-center'>
+//     <nav>
+//     <button
+//         type='reset'
+//         className='nav-search-button font-semibold padding 10px rounded no-line-through hover:line-through'
+//         onClick={weatherTranslate}
+//       />
+//     </nav>
+//     <div>
+//       {lat} is your current latitude and {long} is your current longitude.
+//     </div>
+//     <div>{(weatherTranslate(weatherData)[0].weather).toString()}</div>
+//     <div>
+//       Your current temperature is {(weatherTranslate(weatherData)[0].temp).toString()} degrees Farenheit.
+//     </div>
+//     <div>
+//       The highs and lows for right now are {(weatherTranslate(weatherData)[0].temp_max).toString()} and {(weatherTranslate(weatherData)[0].temp_min).toString()} degrees Farenheit.
+//     </div>
+// </CardContent >
+// </>
+
 
 export default WeatherDisplayMain;

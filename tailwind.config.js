@@ -12,6 +12,17 @@ export default {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
+      animation: {
+        'spin-slow': 'spin 5.5s linear infinite',
+        'spin-slower': 'reverse-spin 7s liner infinite',
+        'reverse-spin': 'reverse-spin 7s linear infinite',
+      },
+      keyframes: {
+        'reverse-spin': {
+          from: { transform: 'rotate(360deg)' },
+          to: { transform: 'rotate(0deg)' },
+        },
+      },
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
