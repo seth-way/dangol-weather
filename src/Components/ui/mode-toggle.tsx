@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Moon, Sun, Bold } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { useTheme } from '@/components/ui/theme-provider';
 

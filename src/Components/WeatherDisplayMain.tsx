@@ -2,19 +2,15 @@
 import AsciiArt from './AsciiArt';
 import GlobeSVG from '../assets/images/globe.svg?react';
 import classicBoom from '../assets/images/booms/classic_boom.jpg';
-import { useParams } from 'react-router-dom';
+//import { useParams } from 'react-router-dom';
 import weatherData from '../assets/dummy_data/weather.json';
 import {
   CardContent,
-  CardDescription,
   CardFooter,
-  CardHeader,
-  CardTitle,
-  Button,
-  Dropdownmenu
 } from '@/components/ui/card';
-import { useState } from 'react';
-import { weatherInfoObject, weatherDataFormat, userSideWeatherInfo, weatherTranslateWeekly } from '@/lib/utils';
+//import { useState } from 'react';
+//import { weatherInfoObject, weatherDataFormat, userSideWeatherInfo} from '/@lib/utils';
+import { weatherTranslateWeekly } from '@/lib/utils';
 
 
 import DropdownDisplay from './DropdownDisplay';
@@ -24,11 +20,11 @@ interface Props {
 }
 
 const WeatherDisplayMain = ({ city }: Props) => {
-  const [weather5Day, set5Day] = useState([]);
-  const [currentDay, setCurrentDay] = useState(0)
-  const { lat, long } = useParams<{ lat: string; long: string }>();
+  //const [weather5Day, set5Day] = useState([]);
+  //const [currentDay, setCurrentDay] = useState(0)
+  //const { lat, long } = useParams<{ lat: string; long: string }>();
   console.log('weather data ', weatherData);
-  const returnWeather: Array<userSideWeatherInfo> = (weatherTranslateWeekly(weatherData));
+  //const returnWeather: Array<userSideWeatherInfo> = (weatherTranslateWeekly(weatherData));
 
  
   

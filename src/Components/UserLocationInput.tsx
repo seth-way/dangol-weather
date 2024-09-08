@@ -5,7 +5,6 @@ import { CardContent, CardFooter, CardHeader } from '@/components/ui/card.tsx';
 import classicBoom from '../assets/images/booms/classic_boom.jpg';
 import GlobeSVG from '../assets/images/globe.svg?react';
 import { useState, useEffect } from 'react';
-import locationData from '../assets/dummy_data/location.json';
 import { useNavigate } from 'react-router-dom';
 import { APIProvider } from '@vis.gl/react-google-maps';
 

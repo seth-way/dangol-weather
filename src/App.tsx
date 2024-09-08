@@ -2,15 +2,9 @@ import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import WeatherDisplayMain from './components/WeatherDisplayMain.tsx';
-import DropdownDisplay from './components/DropdownDisplay.tsx';
 import UserLocationInput from './components/UserLocationInput.tsx';
 import {
   Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
 } from '@/components/ui/card.tsx';
 import { ModeToggle } from './components/ui/mode-toggle.tsx';
 
