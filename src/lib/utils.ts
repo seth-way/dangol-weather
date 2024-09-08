@@ -147,12 +147,11 @@ export function weatherTranslate(weatherInfo: any) {
     })
     let dateInstance = new Date(weatherInfoArrayToday[0].date_text);
 
-    if (dateInstance.getHours()>=12){
+    if (dateInstance.getHours() >= 12) {
       weatherInfoArrayWeek.unshift(weatherInfoArrayToday[0]);
     }
-    while(weatherInfoArrayWeek.length > 5)
-    {
-      weatherInfoArrayWeek.splice(5,1);
+    while (weatherInfoArrayWeek.length > 5) {
+      weatherInfoArrayWeek.splice(5, 1);
     }
     let finalVals: Array<Array<userSideWeatherInfo>> = [weatherInfoArrayToday, weatherInfoArrayWeek]
     // return getDaysAfter(Date.now(), weatherInfo);
@@ -161,16 +160,20 @@ export function weatherTranslate(weatherInfo: any) {
   return returnInfo(weatherInfo);
 }
 
-export function weatherTranslateDaily(weatherInfo:any){
+export function weatherTranslateDaily(weatherInfo: any) {
   console.log(weatherTranslate(weatherInfo)[0])
+  // let stringVersion: string = "";
+  // weatherTranslate(weatherData)[1].forEach((remainingTime) => {
+  //   stringVersion = stringVersion.concat(remainingTime.weather.toString(), "\n")
+  // });
   return weatherTranslate(weatherInfo)[0];
 }
-export function weatherTranslateWeekly(weatherInfo:any){
+export function weatherTranslateWeekly(weatherInfo: any) {
   console.log(weatherTranslate(weatherInfo)[1])
   return weatherTranslate(weatherInfo)[1];
 
- }
- 
+}
+
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))

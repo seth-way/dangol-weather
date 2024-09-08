@@ -18,15 +18,14 @@ function App() {
   // const [location, setLocation] = useState(null);
   const [citiesList, setCitiesList] = useState<string[]>([]);
   const [filteredCities, setFilteredCities] = useState<string[]>([]);
-
+  const [city, setCity] = useState<string>('');
   return (
     <>
       <Card>
       <ModeToggle className='mt-5' />
         <Routes>
-          <Route path={'/'} element={<UserLocationInput setFilteredCities={setFilteredCities} 
-          filteredCities={filteredCities} citiesList={citiesList} setCitiesList={setCitiesList}  />} />
-          <Route path={'/location/:lat/:long'} element={<WeatherDisplayMain />} />
+          <Route path={'/'} element={<UserLocationInput setCity={setCity}/>} />
+          <Route path={'/location/:lat/:long'} element={<WeatherDisplayMain city={city}/>} />
          {/*  <Route path={'/'} element={<DropdownDisplay />} /> */}
         </Routes>
         {/* <CardHeader>
