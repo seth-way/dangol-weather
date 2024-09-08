@@ -19,6 +19,7 @@ function App() {
         <Routes>
           <Route path={'/'} element={<UserLocationInput setCity={setCity}/>} />
           <Route path={'/location/:lat/:long'} element={<WeatherDisplayMain city={city}/>} />
+          <Route path={'/location/:lat/:long'} element={<DropdownDisplay />} />
          {/*  <Route path={'/'} element={<DropdownDisplay />} /> */}
         </Routes>
         {/* <CardHeader>

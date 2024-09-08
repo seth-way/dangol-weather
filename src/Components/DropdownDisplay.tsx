@@ -19,11 +19,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-//--------------------
 
-//display the date without the year
-//the drop down will have an image and the date in month and day
-//
 
 const functionToRemoveYear = (oldDate: string) => {
   const [date] = oldDate.split(' ');
@@ -51,91 +47,94 @@ interface WeatherTime {
 interface WeatherMain {
   list: WeatherTime[];
 }
-// assign the JSON data to a variable
-const newWeatherData: NewWeatherData = weatherData;
-console.log('line 34--', newWeatherData);
 
-// const removeYear = (oldDate)=> {
-//   const noYear = oldDate.split('-')
 
-// }
-
-// data type 'NewWeatherData' is an argument and
-// we use it to grab the information we need
-// reduce would be better to group them by date
-const displayMyDropdown = (data: NewWeatherData) => {
-  const sortedByDate = data.list.reduce((acc, element) => {
-    const time = element.dt_txt.split(' ')[0];
-    if (!acc[time]) {
-      acc[time] = element;
-    }
-    return acc;
-  }, {} as Record<string, WeatherTime>);
-  return Object.values(sortedByDate)
-    .slice(0, 5)
-    .map(element => ({
-      // // console.log('------->',element.dt_txt.split(' ')[0])
-      //   return {
-      // date: element.dt_txt.split(' ')[0],
-      date: functionToRemoveYear(element.dt_txt),
-      icon: element.weather[0].icon,
-    }));
-  // })
-  // console.log(sortedByDate)
-  // return Object.values(sortedByDate).slice(0, 5).map(item => ({
-  //   date: item.dt_txt.split(' ')[0],
-  //   icon: item.weather[0].icon
-  // }))
-  // const convertedData = Object.values(sortedByDate).slice(0, 5).map(element => {
-  // // console.log('------->',element.dt_txt.split(' ')[0])
-  //   return {
-  //     date: element.dt_txt.split(' ')[0],
-  //     icon: element.weather[0].icon
-  //   }
-  // })
-};
 
 const DropdownDisplay: React.FC = () => {
+
+  const {lat, long} = useParams<{lat:string; long: string}>();
+  console.log(lat)
+  console.log(long)
   const navigate = useNavigate();
 
   const homePageView = () => {
     navigate('/');
   };
 
-  const [drop, setDrop] = useState<boolean>(false);
-  // const [myWeather, setMyWeather] = useState<boolean>(false)
-  // need to toggle the functionality of the button
-  // setDrop updates it so if its open its true
-  // '!' makes it false
-  // the function goes back and forth based on if its true or false
-  const toggleFunction = () => {
-    setDrop(open => !open);
-  };
 
-  // console.log(weatherData.list[0].dt_txt) //time
-  // console.log(weatherData.list[0].weather[0].icon) //icon
-  // console.log(weatherData.list)
-  // const newWeather = weatherData.list
   const allIcons: Record<string, string> = {
     '10n': RainSVG,
     '04d': CloudSVG,
     '01d': SunnySVG,
     '02d': FogSVG,
-    '03d': SnowSVG,
-  };
+    '03d': SnowSVG
+  }
+  
+  // const [apiWeather, setApiWeather] = useState(false)
+  const [fiveDayForecast, setFiveDayForecast] = useState<{ date: string; icon: string }[] | undefined>(undefined);
 
-  const newWeatherData: NewWeatherData = weatherData;
-  const [fiveDayForecast, setFiveDayForecast] = useState<
-    { date: string; icon: string }[] | undefined
-  >(undefined);
-  // const fiveDayForecast = displayMyDropdown(newWeatherData)
-  // console.log(fiveDayForecast)
 
-  useEffect(() => {
-    const foreCast = displayMyDropdown(newWeatherData);
-    setFiveDayForecast(foreCast);
-  }, [newWeatherData]);
-  console.log('line 110', fiveDayForecast);
+
+  const fiveDaySerchForecast = async () => {
+    if (!lat || !long) {
+      return
+    }
+
+    const latitude = parseFloat(lat)
+    console.log(latitude)
+    const longitude = parseFloat(long)
+    try {
+      const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude.toFixed(4)}&lon=${longitude.toFixed(4)}&appid=${import.meta.env.VITE_WEATHER_API_KEY}&units=imperial`;
+      console.log('-----',long)
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log('what am i getting ----> ',data)
+      if(!response.ok) {
+        console.error('Errorrrrr', data.message)
+        return
+      }
+      // console.log(data.list)
+      console.log('----->')
+      console.log('*---->', lat)
+
+
+      const sortedByDate = data.list.reduce((acc, element)=> {
+        const time = element.dt_txt.split(' ')[0]
+        if(!acc[time]) {
+          acc[time] = element;
+        }
+        return acc
+      }, {})
+      console.log(data)
+      // return Object.values(sortedByDate).slice(0, 5).map(element => ({
+      //       date: functionToRemoveYear(element.dt_txt),
+      //       icon: element.weather[0].icon
+      // }))
+      const anotherForecast = Object.values(sortedByDate).slice(0, 5).map(element => ({
+        date: functionToRemoveYear(element.dt_txt),
+        icon: element.weather[0].icon
+      }))
+      console.log('anotherForecast---->', anotherForecast)
+      setFiveDayForecast(anotherForecast)
+
+    //   const icon = allIcons[data.weather[0].icon] || SunnySVG
+
+    //   setApiWeather({
+    //     temperature: Math.floor(data.main.temp),
+    //     icon: icon
+    //   })
+    } catch (error) {
+      setFiveDayForecast(undefined);
+    }
+  }
+
+  useEffect(()=> {
+    console.log('lat', lat, 'lon', long)
+    fiveDaySerchForecast()
+    
+  }, [lat, long])
+
+  console.log('line 110', fiveDayForecast)
   return (
     <div className='flex justify-start p-4'>
       <DropdownMenu>
@@ -145,18 +144,12 @@ const DropdownDisplay: React.FC = () => {
         <DropdownMenuContent className='w-20 ml-12'>
           <DropdownMenuLabel>Forecast</DropdownMenuLabel>
           <DropdownMenuGroup className='max-h-[500px] w-25 pl-1'>
-            <div className='cursor-pointer'>
-              {fiveDayForecast?.map((weather, index) => (
-                <DropdownMenuItem className='flex items-center'>
-                  <div
-                    key={index}
-                    className='flex items-center justify-between mb-2'
-                  >
-                    <p className='text-xs'>{weather.date}</p>
-                    <img
-                      src={allIcons[weather.icon] || SunnySVG}
-                      className='w-8 h-8 pl-1 ml-5'
-                    />
+            <div>
+              {fiveDayForecast?.map((weather, index)=> (
+                <DropdownMenuItem className='flex items-center' >
+                  <div key={index} className='flex items-center justify-between mb-2'>
+                    <p className="text-xs">{weather.date}</p>
+                    <img src={allIcons[weather.icon] || SunnySVG} className='w-8 h-8 pl-1 ml-5'/>
                   </div>
                 </DropdownMenuItem>
               ))}
@@ -164,16 +157,9 @@ const DropdownDisplay: React.FC = () => {
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
-      {/* <Popover>
-        <PopoverTrigger className='pl-1' >
-          <Button onClick={homePageView}>
-            Home
-          </Button>
-        </PopoverTrigger>
-      </Popover > */}
-      <DropdownMenu>
+      <DropdownMenu >
         <DropdownMenuTrigger asChild>
-          <Button variant='outline' className='ml-2'>
+          <Button variant="outline" className='ml-2' onClick={homePageView}>
             Home
           </Button>
         </DropdownMenuTrigger>
