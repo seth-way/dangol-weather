@@ -199,62 +199,61 @@ const WeatherDisplayMain = () => {
     console.log(stringVersion)
 
     // console.log(weatherTranslate(weatherData));
-    return [weatherTranslate(weatherData), stringVersion]
-//     (
-//         <div>
-//             <div>
-//                 <h1>Your Weather Display
-//                     <br />
-//                     Updated as of {(weatherTranslate(weatherData)[0][0].date_text).toString()}, UTC.
-//                 </h1>
+    return (
+        <div>
+            <div>
+                <h1>Your Weather Display
+                    <br />
+                    Updated as of {(weatherTranslate(weatherData)[0][0].date_text).toString()}, UTC.
+                </h1>
 
-//                 <div>
-//                     {lat} is your current latitude and {long} is your current longitude.
-//                 </div>
-//                 <div>Your current weather is: {(weatherTranslate(weatherData)[0][0].weather).toString()}</div>
-//                 <div>
-//                     Your current temperature is {(weatherTranslate(weatherData)[0][0].temp).toString()} degrees Farenheit.
-//                 </div>
-//                 <div>
-//                     The highs and lows for right now are {(weatherTranslate(weatherData)[0][0].temp_max).toString()} and {(weatherTranslate(weatherData)[0][0].temp_min).toString()} degrees Farenheit.
-//                 </div>
-//                 <div>
-//                     The humidity is {(weatherTranslate(weatherData)[0][0].humidity).toString()} percent.
-//                 </div>
-//                 <div>
-//                     The windspeed is {(weatherTranslate(weatherData)[0][0].windspeed).toString()} MPH.
-//                 </div>
-//             </div>
-//             <div>
-//                 <br />
-//                 <div>
-//                     Your weather for the rest of the day:
-//                 </div>
-//                 <br />
-//                 {stringVersion}
-//                 <br />
+                <div>
+                    {lat} is your current latitude and {long} is your current longitude.
+                </div>
+                <div>Your current weather is: {(weatherTranslate(weatherData)[0][0].weather).toString()}</div>
+                <div>
+                    Your current temperature is {(weatherTranslate(weatherData)[0][0].temp).toString()} degrees Farenheit.
+                </div>
+                <div>
+                    The highs and lows for right now are {(weatherTranslate(weatherData)[0][0].temp_max).toString()} and {(weatherTranslate(weatherData)[0][0].temp_min).toString()} degrees Farenheit.
+                </div>
+                <div>
+                    The humidity is {(weatherTranslate(weatherData)[0][0].humidity).toString()} percent.
+                </div>
+                <div>
+                    The windspeed is {(weatherTranslate(weatherData)[0][0].windspeed).toString()} MPH.
+                </div>
+            </div>
+            <div>
+                <br />
+                <div>
+                    Your weather for the rest of the day:
+                </div>
+                <br />
+                {stringVersion}
+                <br />
 
-//             </div>
-//             <div>
-//                 <br />
-//                 <div>
-//                     Your 5-ish day forecast:
-//                 </div>
-//                 <br />
-//                 Now: {(weatherTranslate(weatherData)[1][0].weather)}
-//                 <br />
-//                 {(weatherTranslate(weatherData)[1][1].date_text)}: {(weatherTranslate(weatherData)[1][1].weather)}
-//                 <br />
-//                 {(weatherTranslate(weatherData)[1][2].date_text)}: {(weatherTranslate(weatherData)[1][2].weather)}
-//                 <br />
-//                 {(weatherTranslate(weatherData)[1][3].date_text)}: {(weatherTranslate(weatherData)[1][3].weather)}
-//                 <br />
-//                 {(weatherTranslate(weatherData)[1][4].date_text)}: {(weatherTranslate(weatherData)[1][4].weather)}
-//                 <br />
-//             </div>
-//         </div>
-//     )
-//    ;
+            </div>
+            <div>
+                <br />
+                <div>
+                    Your 5-ish day forecast:
+                </div>
+                <br />
+                Now: {(weatherTranslate(weatherData)[1][0].weather)}
+                <br />
+                {(weatherTranslate(weatherData)[1][1].date_text)}: {(weatherTranslate(weatherData)[1][1].weather)}
+                <br />
+                {(weatherTranslate(weatherData)[1][2].date_text)}: {(weatherTranslate(weatherData)[1][2].weather)}
+                <br />
+                {/* {(weatherTranslate(weatherData)[1][3].date_text)}: {(weatherTranslate(weatherData)[1][3].weather)} */}
+                <br />
+                {/* {(weatherTranslate(weatherData)[1][4].date_text)}: {(weatherTranslate(weatherData)[1][4].weather)} */}
+                <br />
+            </div>
+        </div>
+    )
+   ;
 };
 
 export default WeatherDisplayMain;
