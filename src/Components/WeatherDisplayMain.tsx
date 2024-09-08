@@ -19,6 +19,9 @@ import {
   Button,
   Dropdownmenu
 } from '@/components/ui/card';
+
+import { useState } from 'react';
+import { weatherInfoObject, weatherDataFormat, userSideWeatherInfo, weatherTranslateWeekly } from '@/lib/utils';
 import DropdownDisplay from './DropdownDisplay';
 import { useEffect, useState } from 'react';
 
@@ -27,8 +30,9 @@ interface Props {
 }
 
 const WeatherDisplayMain = ({ city }: Props) => {
+  const [weather5Day, set5Day] = useState([]);
+  const [currentDay, setCurrentDay] = useState(0)
   const { lat, long } = useParams<{ lat: string; long: string }>();
-  // console.log('weather data ', weatherData);
 
   const [weatherData, setWetherData] = useState(false)
 
@@ -120,6 +124,7 @@ const WeatherDisplayMain = ({ city }: Props) => {
     </>
   );
 };
+
 
 
 
