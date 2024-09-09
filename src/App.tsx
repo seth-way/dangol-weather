@@ -2,15 +2,9 @@ import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import WeatherDisplayMain from './components/WeatherDisplayMain.tsx';
-import DropdownDisplay from './components/DropdownDisplay.tsx';
 import UserLocationInput from './components/UserLocationInput.tsx';
 import {
   Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
 } from '@/components/ui/card.tsx';
 import { ModeToggle } from './components/ui/mode-toggle.tsx';
 
@@ -25,7 +19,7 @@ function App() {
         <Routes>
           <Route path={'/'} element={<UserLocationInput setCity={setCity}/>} />
           <Route path={'/location/:lat/:long'} element={<WeatherDisplayMain city={city}/>} />
-          <Route path={'/location/:lat/:long'} element={<DropdownDisplay />} />
+          {/* <Route path={'/location/:lat/:long'} element={<DropdownDisplay />} /> */}
          {/*  <Route path={'/'} element={<DropdownDisplay />} /> */}
         </Routes>
         {/* <CardHeader>

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ImageAscii, ArtTypeEnum } from 'image-ascii-art';
-import { useTheme } from '@/components/ui/theme-provider';
+//import { useTheme } from '@/components/ui/theme-provider';
 
 interface AsciiProps {
   src: string;
@@ -12,7 +12,7 @@ interface AsciiProps {
 const AsciiArt = ({ src, height, width }: AsciiProps) => {
   const [img, setImg] = useState<HTMLImageElement>();
   const parentRef = useRef(null);
-  const { theme } = useTheme();
+  //const { theme } = useTheme();
 
   useEffect(() => {
     const image = new Image();
