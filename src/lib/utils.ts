@@ -4,7 +4,23 @@ export interface weatherInfoObject {
   cod: string;
   message: number;
   cnt: number;
-  list: any[];
+  list: weatherDataFormat[];
+  city: ICity;
+}
+interface ICity {
+  id: number;
+  name: string;
+  coord: ICoord;
+  country: string;
+  population: number;
+  timezone: number;
+  sunrise: number;
+  sunset: number;
+}
+
+interface ICoord {
+  lat: number;
+  lon: number;
 }
 export interface userSideWeatherInfo {
   weather: string;
@@ -59,7 +75,7 @@ export function weatherTranslate(weatherInfo: any) {
     const arrayOfDates: Array<number> = [];
     function returnCurrentTime(timeNow: number, info: weatherInfoObject) {
       let smallestDifference: number = 999999999999;
-      let closestTime: string = 'none';
+      //let closestTime: string = 'none';
       let closestGoingToArray: weatherDataFormat = info.list[0];
       info.list.forEach(listObject => {
         if (
@@ -69,7 +85,7 @@ export function weatherTranslate(weatherInfo: any) {
           smallestDifference = Math.min(
             Math.abs(timeNow - listObject.dt * 1000)
           );
-          closestTime = listObject.dt_txt + ' Universal Time Coordinated';
+          //closestTime = listObject.dt_txt + ' Universal Time Coordinated';
           closestGoingToArray = listObject;
         }
       });
@@ -104,32 +120,32 @@ export function weatherTranslate(weatherInfo: any) {
     });
     returnCurrentTime(Date.now(), weatherInfo)
 
-    let weatherPasser: userSideWeatherInfo = { temp: 0, temp_max: 0, temp_min: 0, humidity: 0, windspeed: 0, weather: "", date_text: "", date_val: 0 };
-    function weatherRestOfTheDay(currentTimestamp: number, info: weatherInfoObject) {
-      let happenedYet: Boolean = true;
-      const nowTillTomorrow: Array<weatherDataFormat> = [];
-      info.list[0].forEach((weatherObject: weatherDataFormat) => {
-        if (currentTimestamp <= weatherObject.dt) {
-          happenedYet = false;
-        }
-        if ((happenedYet === false) && (((weatherObject.dt + 43200) % 86400) != 0)) {
-          nowTillTomorrow.push(weatherObject);
-        }
-      })
+    const weatherPasser: userSideWeatherInfo = { temp: 0, temp_max: 0, temp_min: 0, humidity: 0, windspeed: 0, weather: "", date_text: "", date_val: 0 };
+    // function weatherRestOfTheDay(currentTimestamp: number, info: weatherInfoObject) {
+    //   let happenedYet: Boolean = true;
+    //   const nowTillTomorrow: Array<weatherDataFormat> = [];
+    //   info.list[0].forEach((weatherObject: weatherDataFormat) => {
+    //     if (currentTimestamp <= weatherObject.dt) {
+    //       happenedYet = false;
+    //     }
+    //     if ((happenedYet === false) && (((weatherObject.dt + 43200) % 86400) != 0)) {
+    //       nowTillTomorrow.push(weatherObject);
+    //     }
+    //   })
 
-      nowTillTomorrow.forEach((times) => {
-        weatherPasser.temp = times.main.temp;
-        weatherPasser.temp_min = times.main.temp_min;
-        weatherPasser.temp_max = times.main.temp_max;
-        weatherPasser.humidity = times.main.humidity;
-        weatherPasser.windspeed = times.wind.speed;
-        weatherPasser.date_text = times.dt_txt;
-        weatherPasser.date_val = times.dt;
-        weatherPasser.weather = times.weather[0].main;
-        weatherInfoArrayToday.push(JSON.parse(JSON.stringify(weatherPasser)));
-      })
-      return;
-    }
+    //   nowTillTomorrow.forEach((times) => {
+    //     weatherPasser.temp = times.main.temp;
+    //     weatherPasser.temp_min = times.main.temp_min;
+    //     weatherPasser.temp_max = times.main.temp_max;
+    //     weatherPasser.humidity = times.main.humidity;
+    //     weatherPasser.windspeed = times.wind.speed;
+    //     weatherPasser.date_text = times.dt_txt;
+    //     weatherPasser.date_val = times.dt;
+    //     weatherPasser.weather = times.weather[0].main;
+    //     weatherInfoArrayToday.push(JSON.parse(JSON.stringify(weatherPasser)));
+    //   })
+    //   return;
+    // }
 
     if (getDaysAfter(Date.now(), weatherInfo).length <= 4) {
       weatherInfoArrayWeek.push(weatherInfoArrayToday[0])
@@ -145,7 +161,7 @@ export function weatherTranslate(weatherInfo: any) {
       weatherPasser.weather = upcomingDay.weather[0].main;
       weatherInfoArrayWeek.push(JSON.parse(JSON.stringify(weatherPasser)));
     })
-    let dateInstance = new Date(weatherInfoArrayToday[0].date_text);
+    const dateInstance = new Date(weatherInfoArrayToday[0].date_text);
 
     if (dateInstance.getHours() >= 12) {
       weatherInfoArrayWeek.unshift(weatherInfoArrayToday[0]);
@@ -153,7 +169,7 @@ export function weatherTranslate(weatherInfo: any) {
     while (weatherInfoArrayWeek.length > 5) {
       weatherInfoArrayWeek.splice(5, 1);
     }
-    let finalVals: Array<Array<userSideWeatherInfo>> = [weatherInfoArrayToday, weatherInfoArrayWeek]
+    const finalVals: Array<Array<userSideWeatherInfo>> = [weatherInfoArrayToday, weatherInfoArrayWeek]
     // return getDaysAfter(Date.now(), weatherInfo);
     return finalVals;
   }
