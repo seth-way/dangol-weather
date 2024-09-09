@@ -1,5 +1,26 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+import {
+  boomHappyQuotes,
+  boomSadQuotes,
+} from '../assets/boomhauer_quotes/boomhauerQuotes.json';
+import classicBoom from '../assets/images/booms/classic_boom.jpg';
+import rainBoom from '../assets/images/booms/rain_boom.jpg';
+import snowBoom from '../assets/images/booms/snow_boom.jpg';
+import sunnyBoom from '../assets/images/booms/sunny_boom.jpg';
+import thunderBoom from '../assets/images/booms/thunder_boom.jpg';
+import windyBoom from '../assets/images/booms/windy_boom.jpg';
+
+export interface BoomhauerQuote {
+  id: number;
+  quote: string;
+}
+
+export interface BoomhauerQuotes {
+  boomHappyQuotes: BoomhauerQuote[];
+  boomSadQuotes: BoomhauerQuote[];
+}
+
 export interface weatherInfoObject {
   cod: string;
   message: number;
@@ -31,6 +52,7 @@ export interface userSideWeatherInfo {
   windspeed: number;
   date_text: string;
   date_val: number;
+  icon: IIcon;
 }
 export interface weatherDataFormat {
   dt: number;
@@ -47,7 +69,7 @@ interface weatherSubArrayInterface {
   id: number;
   main: string;
   description: string;
-  icon: string;
+  icon: IIcon;
 }
 interface mainSubObjectInterface {
   temp: number;
@@ -66,9 +88,7 @@ interface windSubObjectInterface {
   gust: number;
 }
 
-
 export function weatherTranslate(weatherInfo: any) {
-
   const weatherInfoArrayToday: Array<userSideWeatherInfo> = [];
   const weatherInfoArrayWeek: Array<userSideWeatherInfo> = [];
   function returnInfo(weatherInfo: weatherInfoObject) {
@@ -98,6 +118,7 @@ export function weatherTranslate(weatherInfo: any) {
         windspeed: closestGoingToArray.wind.speed,
         date_text: closestGoingToArray.dt_txt,
         date_val: closestGoingToArray.dt,
+        icon: closestGoingToArray.weather[0].icon,
       };
       weatherInfoArrayToday.push(currentWeather);
       return;
@@ -105,7 +126,10 @@ export function weatherTranslate(weatherInfo: any) {
     function getDaysAfter(currentTime: number, info: weatherInfoObject) {
       const daysAfter: Array<weatherDataFormat> = [];
       info.list.forEach(listObject => {
-        if ((listObject.dt * 1000 >= currentTime) && (((listObject.dt + 43200) % 86400) === 0)) {
+        if (
+          listObject.dt * 1000 >= currentTime &&
+          (listObject.dt + 43200) % 86400 === 0
+        ) {
           daysAfter.push(listObject);
         }
       });
@@ -118,39 +142,25 @@ export function weatherTranslate(weatherInfo: any) {
       }
       hourCount++;
     });
-    returnCurrentTime(Date.now(), weatherInfo)
+    returnCurrentTime(Date.now(), weatherInfo);
 
-    const weatherPasser: userSideWeatherInfo = { temp: 0, temp_max: 0, temp_min: 0, humidity: 0, windspeed: 0, weather: "", date_text: "", date_val: 0 };
-    // function weatherRestOfTheDay(currentTimestamp: number, info: weatherInfoObject) {
-    //   let happenedYet: Boolean = true;
-    //   const nowTillTomorrow: Array<weatherDataFormat> = [];
-    //   info.list[0].forEach((weatherObject: weatherDataFormat) => {
-    //     if (currentTimestamp <= weatherObject.dt) {
-    //       happenedYet = false;
-    //     }
-    //     if ((happenedYet === false) && (((weatherObject.dt + 43200) % 86400) != 0)) {
-    //       nowTillTomorrow.push(weatherObject);
-    //     }
-    //   })
-
-    //   nowTillTomorrow.forEach((times) => {
-    //     weatherPasser.temp = times.main.temp;
-    //     weatherPasser.temp_min = times.main.temp_min;
-    //     weatherPasser.temp_max = times.main.temp_max;
-    //     weatherPasser.humidity = times.main.humidity;
-    //     weatherPasser.windspeed = times.wind.speed;
-    //     weatherPasser.date_text = times.dt_txt;
-    //     weatherPasser.date_val = times.dt;
-    //     weatherPasser.weather = times.weather[0].main;
-    //     weatherInfoArrayToday.push(JSON.parse(JSON.stringify(weatherPasser)));
-    //   })
-    //   return;
-    // }
+    const weatherPasser: userSideWeatherInfo = {
+      temp: 0,
+      temp_max: 0,
+      temp_min: 0,
+      humidity: 0,
+      windspeed: 0,
+      weather: '',
+      date_text: '',
+      date_val: 0,
+      icon: '',
+    };
 
     if (getDaysAfter(Date.now(), weatherInfo).length <= 4) {
-      weatherInfoArrayWeek.push(weatherInfoArrayToday[0])
+      weatherInfoArrayWeek.push(weatherInfoArrayToday[0]);
     }
-    getDaysAfter(Date.now(), weatherInfo).forEach((upcomingDay) => {
+
+    getDaysAfter(Date.now(), weatherInfo).forEach(upcomingDay => {
       weatherPasser.temp = upcomingDay.main.temp;
       weatherPasser.temp_min = upcomingDay.main.temp_min;
       weatherPasser.temp_max = upcomingDay.main.temp_max;
@@ -159,8 +169,9 @@ export function weatherTranslate(weatherInfo: any) {
       weatherPasser.date_text = upcomingDay.dt_txt;
       weatherPasser.date_val = upcomingDay.dt;
       weatherPasser.weather = upcomingDay.weather[0].main;
+      weatherPasser.icon = upcomingDay.weather[0].icon;
       weatherInfoArrayWeek.push(JSON.parse(JSON.stringify(weatherPasser)));
-    })
+    });
     const dateInstance = new Date(weatherInfoArrayToday[0].date_text);
 
     if (dateInstance.getHours() >= 12) {
@@ -169,28 +180,87 @@ export function weatherTranslate(weatherInfo: any) {
     while (weatherInfoArrayWeek.length > 5) {
       weatherInfoArrayWeek.splice(5, 1);
     }
-    const finalVals: Array<Array<userSideWeatherInfo>> = [weatherInfoArrayToday, weatherInfoArrayWeek]
+    const finalVals: Array<Array<userSideWeatherInfo>> = [
+      weatherInfoArrayToday,
+      weatherInfoArrayWeek,
+    ];
     // return getDaysAfter(Date.now(), weatherInfo);
     return finalVals;
   }
   return returnInfo(weatherInfo);
 }
 
-export function weatherTranslateDaily(weatherInfo: any) {
-  console.log(weatherTranslate(weatherInfo)[0])
-  // let stringVersion: string = "";
-  // weatherTranslate(weatherData)[1].forEach((remainingTime) => {
-  //   stringVersion = stringVersion.concat(remainingTime.weather.toString(), "\n")
-  // });
+export function weatherTranslateDaily(
+  weatherInfo: weatherInfoObject
+): userSideWeatherInfo[] {
+  console.log(weatherTranslate(weatherInfo)[0]);
+
   return weatherTranslate(weatherInfo)[0];
 }
-export function weatherTranslateWeekly(weatherInfo: any) {
-  console.log(weatherTranslate(weatherInfo)[1])
+
+export function weatherTranslateWeekly(
+  weatherInfo: weatherInfoObject
+): userSideWeatherInfo[] {
+  console.log(weatherTranslate(weatherInfo)[1]);
   return weatherTranslate(weatherInfo)[1];
-
 }
-
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
+
+export const determineBoomQuote = (
+  currentWeather: string | undefined
+): string => {
+  if (!currentWeather)
+    return `"Tell y'what man, you talk'n bout ol' meanin' ah life, man, go read tha'
+   ol hitchiker's guide, man, y'know talkin' bout ol, 42, man."`;
+  const happyWeatherKeyWords = [
+    'clear',
+    'sunny',
+    'few clouds',
+    'scattered clouds',
+  ];
+  const weatherDescriptor = currentWeather.toLowerCase();
+
+  const weatherMakesBoomhauerHappy = happyWeatherKeyWords.some(keyword =>
+    weatherDescriptor.includes(keyword)
+  );
+
+  if (weatherMakesBoomhauerHappy) {
+    return boomHappyQuotes[Math.floor(Math.random() * boomHappyQuotes.length)]
+      .quote;
+  } else {
+    return boomSadQuotes[Math.floor(Math.random() * boomSadQuotes.length)]
+      .quote;
+  }
+};
+
+type IIcon =
+  | ''
+  | '01d'
+  | '01n'
+  | '02d'
+  | '02n'
+  | '03d'
+  | '03n'
+  | '04d'
+  | '04n'
+  | '09d'
+  | '09n'
+  | '10d'
+  | '10n'
+  | '11d'
+  | '11n'
+  | '13d'
+  | '13n'
+  | '50d';
+
+export const determineBoomImage = (icon: IIcon): string => {
+  if (icon.startsWith('01') || icon.startsWith('02')) return sunnyBoom;
+  if (icon.startsWith('03') || icon.startsWith('04')) return windyBoom;
+  if (icon.startsWith('09') || icon.startsWith('10')) return rainBoom;
+  if (icon.startsWith('11')) return thunderBoom;
+  if (icon.startsWith('13')) return snowBoom;
+  else return classicBoom;
+};

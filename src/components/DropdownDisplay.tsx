@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react';
-//import weatherData from '../assets/dummy_data/weather.json';
+import React from 'react';
 import { Button } from '@/components/ui/button';
-import SunnySVG from '../assets/images/weather_icons/sunny.svg';
-import CloudSVG from '../assets/images/weather_icons/cloudy.svg';
-import SnowSVG from '../assets/images/weather_icons/snow.svg';
-import RainSVG from '../assets/images/weather_icons/rainy.svg';
-import FogSVG from '../assets/images/weather_icons/fog.svg';
-import { useNavigate, useParams } from 'react-router-dom';
-import { weatherInfoObject, weatherDataFormat } from '@/lib/utils';
+import SunnySVG from '../assets/images/weather_icons/sunny.svg?react';
+import CloudSVG from '../assets/images/weather_icons/cloudy.svg?react';
+import SnowSVG from '../assets/images/weather_icons/snow.svg?react';
+import RainSVG from '../assets/images/weather_icons/rainy.svg?react';
+import FogSVG from '../assets/images/weather_icons/fog.svg?react';
+import { useNavigate } from 'react-router-dom';
+import {
+  // weatherInfoObject,
+  // weatherDataFormat,
+  userSideWeatherInfo,
+} from '@/lib/utils';
 
 import {
   DropdownMenu,
@@ -17,8 +20,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-
-
+import { IDays } from './WeatherDisplayMain';
 
 const functionToRemoveYear = (oldDate: string) => {
   const [date] = oldDate.split(' ');
@@ -30,97 +32,34 @@ const functionToRemoveYear = (oldDate: string) => {
   const ourFormat = { month: '2-digit', day: '2-digit' } as const;
   return newDateFormated.toLocaleDateString(undefined, ourFormat);
 };
-// need the drop down to have a date and an icon
-// in the weather data we have a date and an icon
-// need to import a dummy icon to replace the one in the data
 
-// interface WeatherIcon {
-//   icon: string;
-// }
+interface Props {
+  weather5Day: userSideWeatherInfo[] | [];
+  selectedDay: IDays;
+  setSelectedDay: (day: IDays) => void;
+}
 
-// interface WeatherTime {
-//   dt_txt: string;
-//   weather: WeatherIcon[];
-// }
-
-// interface WeatherMain {
-//   list: WeatherTime[];
-// }
-
-
-
-const DropdownDisplay: React.FC = () => {
-
-  const {lat, long} = useParams<{lat:string; long: string}>();
+const DropdownDisplay: React.FC<Props> = ({
+  weather5Day,
+  //selectedDay,
+  setSelectedDay,
+}) => {
   const navigate = useNavigate();
 
   const homePageView = () => {
     navigate('/');
   };
 
+  const allIcons: Record<string, JSX.Element> = {
+    '10n': <RainSVG />,
+    '04d': <CloudSVG />,
+    '01d': <SunnySVG />,
+    '02d': <FogSVG />,
+    '03d': <SnowSVG />,
+  };
 
-  const allIcons: Record<string, string> = {
-    '10n': RainSVG,
-    '04d': CloudSVG,
-    '01d': SunnySVG,
-    '02d': FogSVG,
-    '03d': SnowSVG
-  }
-  
-  // const [apiWeather, setApiWeather] = useState(false)
-  const [fiveDayForecast, setFiveDayForecast] = useState<{ date: string; icon: string }[] | undefined>(undefined);
-
-  useEffect(()=> {
-    const fiveDaySerchForecast = async () => {
-      if (!lat || !long) {
-        return
-      }
-  
-      const latitude = parseFloat(lat)
-      console.log(latitude)
-      const longitude = parseFloat(long)
-      try {
-        const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude.toFixed(4)}&lon=${longitude.toFixed(4)}&appid=${import.meta.env.VITE_WEATHER_API_KEY}&units=imperial`;
-        console.log('-----',long)
-        const response = await fetch(url);
-        const data: weatherInfoObject = await response.json();
-        console.log('what am i getting ----> ',data)
-        if(!response.ok) {
-          console.error('Errorrrrr', data.message)
-          return
-        }
-        // console.log(data.list)
-        console.log('----->')
-        console.log('*---->', lat)
-  
-        type IDateReducer = {[key: string]: weatherDataFormat};
-        const sortedByDate = data.list.reduce((acc, element)=> {
-          const time = element.dt_txt.split(' ')[0]
-          if(!acc[time]) {
-            acc[time] = element;
-          }
-          return acc
-        }, {} as IDateReducer)
-
-        const anotherForecast = Object.values(sortedByDate).slice(0, 5).map(element => ({
-          date: functionToRemoveYear(element.dt_txt),
-          icon: element.weather[0].icon
-        }))
-        console.log('anotherForecast---->', anotherForecast)
-        setFiveDayForecast(anotherForecast)
-  
-      } catch (error) {
-        setFiveDayForecast(undefined);
-        console.error(error)
-      }
-    }
-    void fiveDaySerchForecast()
-    
-  }, [lat, long])
-
-  console.log('line 110', fiveDayForecast)
   return (
-    <div className='flex justify-start p-4'>
+    <div className='flex justify-start p-4 mr-24'>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant='outline'>5 Day</Button>
@@ -129,21 +68,33 @@ const DropdownDisplay: React.FC = () => {
           <DropdownMenuLabel>Forecast</DropdownMenuLabel>
           <DropdownMenuGroup className='max-h-[500px] w-25 pl-1'>
             <div>
-              {fiveDayForecast?.map((weather, index)=> (
-                <DropdownMenuItem className='flex items-center' key={`item_${index}`}>
-                  <div key={index} className='flex items-center justify-between mb-2'>
-                    <p className="text-xs">{weather.date}</p>
-                    <img src={allIcons[weather.icon] || SunnySVG} className='w-8 h-8 pl-1 ml-5'/>
-                  </div>
-                </DropdownMenuItem>
-              ))}
+              {weather5Day.map((weather, index) => {
+                const date = functionToRemoveYear(weather.date_text);
+                const icon = weather.icon;
+                return (
+                  <DropdownMenuItem
+                    className='flex items-center'
+                    key={`item_${index}`}
+                    onClick={() => setSelectedDay(index as IDays)}
+                  >
+                    <div
+                      key={index}
+                      className='flex items-center justify-between mb-2'
+                    >
+                      <p className='text-xs'>{date}</p>
+                      {allIcons[icon] || <SunnySVG />}
+                      {/* // className='w-8 h-8 pl-1 ml-5' */}
+                    </div>
+                  </DropdownMenuItem>
+                );
+              })}
             </div>
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
-      <DropdownMenu >
+      <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className='ml-2' onClick={homePageView}>
+          <Button variant='outline' className='ml-2' onClick={homePageView}>
             Home
           </Button>
         </DropdownMenuTrigger>
