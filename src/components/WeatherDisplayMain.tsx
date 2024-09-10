@@ -91,12 +91,12 @@ const WeatherDisplayMain = ({ city }: Props) => {
           </div>
         </div>
       </CardContent>
-      <CardFooter className='flex justify-center'>
+      <CardFooter className='flex art justify-center'>
         {boom && (
           <AsciiArt src={boom} height={256} width={256} fontSize={0.3} />
         )}
       </CardFooter>
-      <CardContent className='text-right italic text-sm tracking-tighter text-wrap max-w-80'>
+      <CardContent className='quote text-right italic text-sm tracking-tighter text-wrap max-w-80'>
         &quot;{determineBoomQuote(currentWeather?.weather)}&quot; -Boomhauer
       </CardContent>
     </>
