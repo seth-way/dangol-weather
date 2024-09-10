@@ -5,14 +5,13 @@
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "cy": "cypress open"
   },
-  "homepage": "https://seth-way.github.io/weather-west/",
+  "homepage": "https://weather-west.vercel.app/",
   "dependencies": {
     "@googlemaps/extended-component-library": "^0.6.11",
     "@googlemaps/js-api-loader": "^1.16.8",
