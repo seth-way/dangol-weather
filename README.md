@@ -1,4 +1,6 @@
-# 🌐 DANGOL'WEATHER 🌐
+<div align="center">
+  <h1 style="font-size: 3em;">🌐 DANGOL'WEATHER 🌐</h1>
+</div>
 
 ### <div align="center">ABSTRACT:</div>
 [//]: <> (Briefly describe what you built and its features. What problem is the app solving? How does this application solve that problem?)
@@ -27,4 +29,7 @@
 ### <div align="center">WINS + CHALLENGES:</div>
 [//]: <> (What are 2-3 wins you have from this project? What were some challenges you faced - and how did you get over them?)
 <div align="center">
-  <p><strong>Wins:</strong>While navigating a fairly wide range of new technologies, we were succesful in remaining committed to the design and functional minimalism that defined our initial vision for the application.</p>
+  <p><strong>WINS: </strong>While navigating a fairly wide range of new technologies, we were successful in remaining committed to the design and functional minimalism that defined our initial vision for the application.</p>
+
+  <p><strong>CHALLENGES: </strong>As a whole, definitely navigating the learning curve that comes with a series of entirely new technologies like TypeScript, component UI libraries, and Tailwind CSS - all while being relatively new to React. Despite the obstacles presented, to navigated the proper documentation to get to where we needed to be and ended up with a succesful finish!</p>
+</div>
