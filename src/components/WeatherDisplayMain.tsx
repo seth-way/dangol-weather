@@ -61,7 +61,7 @@ const WeatherDisplayMain = ({ city }: Props) => {
   const currentWeather = weather5Day[selectedDay];
   const day = new Date(currentWeather?.date_text).toLocaleDateString();
   const boom = currentWeather ? determineBoomImage(currentWeather?.icon) : '';
-  
+
   return (
     <>
       <CardContent className='flex flex-col items-center justify-center mb-4 px-4'>

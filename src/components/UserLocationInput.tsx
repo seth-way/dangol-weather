@@ -58,7 +58,7 @@ function UserLocationInput({ setCity }: Props) {
         </form>
       </CardContent>
       <CardFooter>
-        <AsciiArt src={classicBoom} height={256} width={256} fontSize={0.3} />
+        <AsciiArt src={classicBoom} height={256} width={256} fontSize={0.5} />
       </CardFooter>
     </>
   );
