@@ -13,6 +13,12 @@
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+  --card-width: 306px;
+  @media only screen and (min-width: 450px) {
+    --card-with: 95vw;
+  }
+  --g1-size: calc(0.135 * var(--card-width));
+  --g2-size: calc(0.35 * var(--card-width));
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

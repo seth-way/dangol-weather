@@ -12,7 +12,10 @@ function App() {
   // if screen < 450 px, set width and height to 95%
   return (
     <>
-      <Card className='relative w-[95vw] sm:w-[306px] h-[95vh] sm:h-[528px]'>
+      <Card
+        className='relative min-w-[95vw] sm:min-w-[306px] min-h-[95vh] sm:min-h-[528px] flex 
+      flex-col items-center justify-start gap-[0vh] sm:gap-[0] pt-20'
+      >
         <ModeToggle />
         <Routes>
           <Route path={'/'} element={<UserLocationInput setCity={setCity} />} />

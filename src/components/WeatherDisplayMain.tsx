@@ -3,7 +3,7 @@ import AsciiArt from './AsciiArt';
 import GlobeSVG from '../assets/images/globe.svg?react';
 import { useParams } from 'react-router-dom';
 
-import { CardContent, CardFooter } from '@/components/ui/card';
+import { CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 //import { useState } from 'react';
 import {
   weatherInfoObject,
@@ -64,12 +64,14 @@ const WeatherDisplayMain = ({ city }: Props) => {
 
   return (
     <>
-      <CardContent className='flex flex-col items-center justify-center mb-4 px-4'>
+      <CardHeader className='absolute top-1'>
         <DropdownDisplay
           weather5Day={weather5Day}
           selectedDay={selectedDay}
           setSelectedDay={setSelectedDay}
         />
+      </CardHeader>
+      <CardContent className='flex flex-col items-center justify-center mb-4 px-4'>
         <div className='flex flex-row justify-center my-4'>
           <GlobeSVG height={50} width={50} className='animate-spin-slow' />
           <GlobeSVG
@@ -96,7 +98,7 @@ const WeatherDisplayMain = ({ city }: Props) => {
           <AsciiArt src={boom} height={256} width={256} fontSize={0.3} />
         )}
       </CardFooter>
-      <CardContent className='quote text-right italic text-sm tracking-tighter text-wrap max-w-80'>
+      <CardContent className='quote text-right italic text-sm tracking-tighter text-wrap max-w-80 absolute bottom-5"'>
         &quot;{determineBoomQuote(currentWeather?.weather)}&quot; -Boomhauer
       </CardContent>
     </>

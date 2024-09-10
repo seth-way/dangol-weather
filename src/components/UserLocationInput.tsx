@@ -35,18 +35,26 @@ function UserLocationInput({ setCity }: Props) {
       <CardHeader
         id='title'
         className='flex justify-start p1-4 font-bold 
-      text-2xl tracking-tighter mr-12'
+      text-2xl tracking-tighter mr-12 absolute top-[-5px]'
       >
         DANGOL&apos;WEATHER
       </CardHeader>
-      <CardContent className='flex flex-col items-center justify-center'>
-        <div className='flex flex-row justify-center my-'>
-          <GlobeSVG height={50} width={50} className='animate-spin-slow' />
-          <GlobeSVG
-            height={120}
-            width={120}
-            className='animate-spin-slower animate-reverse-spin'
-          />
+      <CardContent className='flex flex-col items-center justify-center min-h-[40%] sm:scale-100 scale-105'>
+        <div className='flex flex-row justify-center'>
+          <div className='w-[var(--g1-size)] h-[var(--g1-size)]'>
+            <GlobeSVG
+              height={'100%'}
+              width={'100%'}
+              className='animate-spin-slow'
+            />
+          </div>
+          <div className='w-[var(--g2-size)] h-[var(--g2-size)]'>
+            <GlobeSVG
+              height={'100%'}
+              width={'100%'}
+              className='animate-spin-slower animate-reverse-spin'
+            />
+          </div>
         </div>
         <form className='flex flex-col items-center space-y-2 mt-4'>
           <APIProvider
@@ -57,7 +65,7 @@ function UserLocationInput({ setCity }: Props) {
           </APIProvider>
         </form>
       </CardContent>
-      <CardFooter>
+      <CardFooter className='absolute bottom-[-5px]'>
         <AsciiArt src={classicBoom} height={256} width={256} fontSize={0.5} />
       </CardFooter>
     </>

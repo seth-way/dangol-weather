@@ -31,7 +31,7 @@ const PlaceAutocomplete = ({ onPlaceSelect }: PlaceAutocompleteProps) => {
   }, [onPlaceSelect, placeAutocomplete]);
 
   return (
-    <div className='autocomplete-container'>
+    <div className='autocomplete-container border border-solid border-input rounded-sm'>
       <input ref={inputRef} className='search-by-city text-center font-semibold tracking-tighter rounded w-59 color-foreground bg-background'/>
     </div>
   );
