@@ -1,23 +1,32 @@
-# DANGOL'WEATHER
+# 🌐 DANGOL'WEATHER 🌐
 
-### Abstract:
+### <div align="center">Abstract:</div>
 [//]: <> (Briefly describe what you built and its features. What problem is the app solving? How does this application solve that problem?)
-A local weather app that utilizes both the openweathermap & google maps auto-complete api's. A user can input any US city and get the local weather, along with a 5 day forcast and a King of the Hill's - Boomhauer - inspired, local weather related quote.
+<div align="center">A local weather app that utilizes both the OpenWeatherMap & Google Maps auto-complete APIs. A user can input any US city and get the local weather, along with a 5-day forecast and a King of the Hill's - Boomhauer - inspired, quote that is tonally related to the state of the returned local weather.</div>
 
-### Installation Instructions:
+### <div align="center">Installation Instructions:</div>
 [//]: <> (What steps does a person have to take to get your app cloned down and running?)
 
-### Preview of App:
+### <div align="center">Preview of App:</div>
 [//]: <> (Provide ONE gif or screenshot of your application - choose the "coolest" piece of functionality to show off.)
 
-### Context:
-[//]: <> (Give some context for the project here. How long did you have to work on it? How far into the Turing program are you?)
+### <div align="center">Context:</div>
+<div align="center">DANGOL'WEATHER was a group project written over the course of seven days during our third module and fifth month at Turing. We spent roughly 25 hours writing the application, requiring a bit longer than expected due to our exploration of new technologies (listed below!) within the project.</div>
 
-### Contributors:
-[//]: <> (Who worked on this application? Link to their GitHubs.)
+### <div align="center">Contributors:</div>
+<div align="center">
+  <ul>
+    <li><a href="https://github.com/seth-way">Seth Way</a></li>
+    <li><a href="https://github.com/ZTFitru">Zelalem Fitru</a></li>
+    <li><a href="https://github.com/ROlearyPro">Ryan O'Leary</a></li>
+    <li><a href="https://github.com/robert-phillips33">Robert Phillips</a></li>
+  </ul>
+</div>
 
-### Learning Goals:
-[//]: <> (What were the learning goals of this project? What tech did you work with?)
+### <div align="center">Learning Goals:</div>
+<div align="center">Primarily, our goals were to further our understanding of building React applications, specifically by way of functional forward programming via components and React hooks. We were also able to write the entire app in TypeScript, which was a first for all four of us. Additionally, we incorporated component UI libraries styled via Tailwind CSS (both of which were also firsts for us 😎), streamlining the creation of reusable, visually consistent components across the app.</div>
 
-### Wins + Challenges:
+### <div align="center">Wins + Challenges:</div>
 [//]: <> (What are 2-3 wins you have from this project? What were some challenges you faced - and how did you get over them?)
+<div align="center">
+  <p><strong>Wins:</strong>While navigating a fairly wide range of new technologies, we were succesful in remaining committed to the design and functional minimalism that defined our initial vision for the application.</p>
