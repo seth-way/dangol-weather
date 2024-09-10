@@ -64,14 +64,14 @@ const WeatherDisplayMain = ({ city }: Props) => {
 
   return (
     <>
-      <CardHeader className='absolute top-1'>
+      <CardHeader className='absolute top-0'>
         <DropdownDisplay
           weather5Day={weather5Day}
           selectedDay={selectedDay}
           setSelectedDay={setSelectedDay}
         />
       </CardHeader>
-      <CardContent className='flex flex-col items-center justify-center mb-4 px-4'>
+      <CardContent className='flex flex-col items-center justify-center min-h-[40%] sm:scale-100 scale-105'>
         <div className='flex flex-row justify-center my-4'>
           <GlobeSVG height={50} width={50} className='animate-spin-slow' />
           <GlobeSVG
@@ -93,14 +93,14 @@ const WeatherDisplayMain = ({ city }: Props) => {
           </div>
         </div>
       </CardContent>
-      <CardFooter className='flex art justify-center'>
+      <CardFooter className='flex art justify-center flex-col absolute bottom-0'>
         {boom && (
           <AsciiArt src={boom} height={256} width={256} fontSize={0.3} />
         )}
+        <p className='quote text-right italic text-sm tracking-tighter text-wrap max-w-80 "'>
+          &quot;{determineBoomQuote(currentWeather?.weather)}&quot; -Boomhauer
+        </p>
       </CardFooter>
-      <CardContent className='quote text-right italic text-sm tracking-tighter text-wrap max-w-80 absolute bottom-5"'>
-        &quot;{determineBoomQuote(currentWeather?.weather)}&quot; -Boomhauer
-      </CardContent>
     </>
   );
 };
