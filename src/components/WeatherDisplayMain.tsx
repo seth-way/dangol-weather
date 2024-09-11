@@ -60,6 +60,7 @@ const WeatherDisplayMain = ({ city }: Props) => {
   // const currentDay = today.toLocaleDateString();
   const currentWeather = weather5Day[selectedDay];
   const day = new Date(currentWeather?.date_text).toLocaleDateString();
+  console.log(day);
   const boom = currentWeather ? determineBoomImage(currentWeather?.icon) : '';
 
   return (

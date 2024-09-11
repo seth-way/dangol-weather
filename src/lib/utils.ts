@@ -93,17 +93,19 @@ export function weatherTranslate(weatherInfo: any) {
   const weatherInfoArrayWeek: Array<userSideWeatherInfo> = [];
   function returnInfo(weatherInfo: weatherInfoObject) {
     const arrayOfDates: Array<number> = [];
-    function returnCurrentTime(timeNow: number, info: weatherInfoObject) {
+
+    
+    function returnCurrentTime(info: weatherInfoObject) {
       let smallestDifference: number = 999999999999;
       //let closestTime: string = 'none';
       let closestGoingToArray: weatherDataFormat = info.list[0];
       info.list.forEach(listObject => {
         if (
-          Math.min(Math.abs(timeNow - listObject.dt * 1000)) <=
+          Math.min(Math.abs(info.list[0].dt - listObject.dt * 1000)) <=
           smallestDifference
         ) {
           smallestDifference = Math.min(
-            Math.abs(timeNow - listObject.dt * 1000)
+            Math.abs(info.list[0].dt - listObject.dt * 1000)
           );
           //closestTime = listObject.dt_txt + ' Universal Time Coordinated';
           closestGoingToArray = listObject;
@@ -123,6 +125,7 @@ export function weatherTranslate(weatherInfo: any) {
       weatherInfoArrayToday.push(currentWeather);
       return;
     }
+
     function getDaysAfter(currentTime: number, info: weatherInfoObject) {
       const daysAfter: Array<weatherDataFormat> = [];
       info.list.forEach(listObject => {
@@ -142,7 +145,7 @@ export function weatherTranslate(weatherInfo: any) {
       }
       hourCount++;
     });
-    returnCurrentTime(Date.now(), weatherInfo);
+    returnCurrentTime(weatherInfo);
 
     const weatherPasser: userSideWeatherInfo = {
       temp: 0,
