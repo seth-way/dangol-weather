@@ -22,10 +22,10 @@ const AsciiArt = ({ src, height, width }: AsciiProps) => {
       image.width = width;
       setImg(image);
     };
-  }, [src, height, width]);
+  }, [src, height]);
 
   return (
-    <div ref={parentRef} className='w-64 h-64'>
+    <div ref={parentRef} className='w-64 h-60'>
       {img && (
         <ImageAscii
           image={img}

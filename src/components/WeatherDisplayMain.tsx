@@ -3,7 +3,7 @@ import AsciiArt from './AsciiArt';
 import GlobeSVG from '../assets/images/globe.svg?react';
 import { useParams } from 'react-router-dom';
 
-import { CardContent, CardFooter } from '@/components/ui/card';
+import { CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 //import { useState } from 'react';
 import {
   weatherInfoObject,
@@ -61,15 +61,17 @@ const WeatherDisplayMain = ({ city }: Props) => {
   const currentWeather = weather5Day[selectedDay];
   const day = new Date(currentWeather?.date_text).toLocaleDateString();
   const boom = currentWeather ? determineBoomImage(currentWeather?.icon) : '';
-  
+
   return (
     <>
-      <CardContent className='flex flex-col items-center justify-center mb-4 px-4'>
+      <CardHeader className='absolute top-0'>
         <DropdownDisplay
           weather5Day={weather5Day}
           selectedDay={selectedDay}
           setSelectedDay={setSelectedDay}
         />
+      </CardHeader>
+      <CardContent className='flex flex-col items-center justify-center min-h-[40%] sm:scale-100 scale-105'>
         <div className='flex flex-row justify-center my-4'>
           <GlobeSVG height={50} width={50} className='animate-spin-slow' />
           <GlobeSVG
@@ -91,14 +93,14 @@ const WeatherDisplayMain = ({ city }: Props) => {
           </div>
         </div>
       </CardContent>
-      <CardFooter className='flex art justify-center'>
+      <CardFooter className='flex art justify-center flex-col absolute bottom-0'>
         {boom && (
           <AsciiArt src={boom} height={256} width={256} fontSize={0.3} />
         )}
+        <p className='quote text-right italic text-sm tracking-tighter text-wrap max-w-80 "'>
+          &quot;{determineBoomQuote(currentWeather?.weather)}&quot; -Boomhauer
+        </p>
       </CardFooter>
-      <CardContent className='quote text-right italic text-sm tracking-tighter text-wrap max-w-80'>
-        &quot;{determineBoomQuote(currentWeather?.weather)}&quot; -Boomhauer
-      </CardContent>
     </>
   );
 };
