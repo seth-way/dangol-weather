@@ -95,7 +95,7 @@ export function weatherTranslate(weatherInfo: any) {
     const arrayOfDates: Array<number> = [];
 
     
-    function returnCurrentTime(timeNow: number, info: weatherInfoObject) {
+    function returnCurrentTime(info: weatherInfoObject) {
       let smallestDifference: number = 999999999999;
       //let closestTime: string = 'none';
       let closestGoingToArray: weatherDataFormat = info.list[0];
@@ -145,7 +145,7 @@ export function weatherTranslate(weatherInfo: any) {
       }
       hourCount++;
     });
-    returnCurrentTime(Date.now(), weatherInfo);
+    returnCurrentTime(weatherInfo);
 
     const weatherPasser: userSideWeatherInfo = {
       temp: 0,
