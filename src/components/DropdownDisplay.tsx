@@ -79,7 +79,7 @@ const DropdownDisplay: React.FC<Props> = ({
                   >
                     <div
                       key={index}
-                      className='flex items-center justify-between mb-2'
+                      className='flex items-center justify-between mb-2 max-h-8'
                     >
                       <p className='text-xs'>{date}</p>
                       {allIcons[icon] || <SunnySVG />}
