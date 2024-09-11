@@ -1,6 +1,6 @@
-<div align="center">
-  <h1 style="font-size: 3em;">🌐 DANGOL'WEATHER 🌐</h1>
-</div>
+<h1 align="center">
+  <a href="https://dangol-weather.vercel.app">DANGOL'WEATHER</a>
+</h1>
 
 <p align="center">
   <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
@@ -9,15 +9,17 @@
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
   <img src="https://img.shields.io/badge/Vite-646CFF.svg?style=for-the-badge&logo=Vite&logoColor=white" />
   <img src="https://img.shields.io/badge/Tailwind%20CSS-06B6D4.svg?style=for-the-badge&logo=Tailwind-CSS&logoColor=white" />
+  <img src="https://img.shields.io/badge/Cypress-17202C?style=for-the-badge&logo=cypress&logoColor=white" />
 </p>
 
+
+<div align="center">
+  <strong>Check out our application by clicking "DANGOL'WEATHER" above!</strong>
+</div>
 
 ### <div align="center">ABSTRACT:</div>
 [//]: <> (Briefly describe what you built and its features. What problem is the app solving? How does this application solve that problem?)
 <div align="center">A local weather app that utilizes both the OpenWeatherMap & Google Maps auto-complete APIs. A user can input any US city and get the local weather, along with a 5-day forecast and a King of the Hill's - Boomhauer - inspired, quote that is tonally related to the state of the returned local weather.</div>
-
-### <div align="center">INSTALLATION:</div>
-[//]: <> (What steps does a person have to take to get your app cloned down and running?)
 
 ### <div align="center">APP PREVIEW:</div>
 [//]: <> (Provide ONE gif or screenshot of your application - choose the "coolest" piece of functionality to show off.)
