@@ -21,15 +21,35 @@ describe('template spec', () => {
     
   })
 
-  it('should correctly choose a quote/image appropriate for the weather', () => {
+  it('should properly implement buttons for dropdown and home', () => {
     
     cy.get('.text-center > :nth-child(2) > :nth-child(1)').contains("conditions: Clear");
     cy.get('.quote')
+    // cy.wait('@Get 5 day')
+    cy.get('.dropDownBtn').click()
+    // cy.get('#radix-\:r2\:').should('exist')
+    cy.get('.text-xs').should('exist')  
+    cy.wait(1000)
+    cy.get(':nth-child(1) > [tabindex="-1"]').click();
+    // cy.get('.ml-2')
   })
 
-  it('should correctly choose a quote/image appropriate for the weather', () => {
+  // it('Should properly implement Home button', () => {
+  //   cy.get('.ml-2').click()
+  //   cy.url().should('equal', 'http://localhost:5173/')
+
+  // })
+  // it('Should properly implement Light/dark mode',()=>{
+
     
-  })
+  // })
 
+  // it('Should properly implement dropdown',()=>{
+  //  cy.get('.dropDownBtn').click()
+  //   // cy.
+  // })
+
+
+  
 });
 

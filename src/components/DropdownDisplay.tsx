@@ -62,7 +62,7 @@ const DropdownDisplay: React.FC<Props> = ({
     <div className='flex justify-start p-4 mr-24'>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant='outline'>5 Day</Button>
+          <Button variant='outline' className='dropDownBtn'>5 Day</Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className='w-20 ml-12'>
           <DropdownMenuLabel>Forecast</DropdownMenuLabel>
