@@ -25,13 +25,11 @@ describe('template spec', () => {
     
     cy.get('.text-center > :nth-child(2) > :nth-child(1)').contains("conditions: Clear");
     cy.get('.quote')
-    // cy.wait('@Get 5 day')
-    cy.get('.dropDownBtn').click()
-    // cy.get('#radix-\:r2\:').should('exist')
-    cy.get('.text-xs').should('exist')  
-    cy.wait(1000)
-    cy.get(':nth-child(1) > [tabindex="-1"]').click();
-    // cy.get('.ml-2')
+    cy.get('.dropDownBtn').click() 
+    cy.get('.flex').should('be.visible')
+    cy.get('.text-xs').should('contain', '09')
+    cy.contains('09/12').click()
+    cy.get(':nth-child(2) > .italic').contains('9/12/2024')    
   })
 
   // it('Should properly implement Home button', () => {
