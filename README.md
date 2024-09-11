@@ -21,8 +21,10 @@
 [//]: <> (Briefly describe what you built and its features. What problem is the app solving? How does this application solve that problem?)
 <div align="center">A local weather app that utilizes both the OpenWeatherMap & Google Maps auto-complete APIs. A user can input any US city and get the local weather, along with a 5-day forecast and a King of the Hill's - Boomhauer - inspired, quote that is tonally related to the state of the returned local weather.</div>
 
-### <div align="center">APP PREVIEW:</div>
-[//]: <> (Provide ONE gif or screenshot of your application - choose the "coolest" piece of functionality to show off.)
+### <div align="center">PREVIEW:</div>
+<div align="center">
+  <img src="https://media.giphy.com/media/R9AX3mKTy44ZnzEqDn/giphy.gif" alt="Gif I Made">
+</div>
 
 ### <div align="center">CONTEXT:</div>
 <div align="center">DANGOL'WEATHER was a group project written over the course of seven days during our third module and fifth month at Turing. We spent roughly 25 hours writing the application, requiring a bit longer than expected due to our exploration of new technologies (listed below!) within the project.</div>
